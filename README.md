@@ -160,53 +160,14 @@ erDiagram
 
 ---
 
-## Checklist de Tarefas (Roadmap do Projeto)
-
-### 🔹 Etapa 1 — Estrutura inicial
-
-* [x] Criar repositório no GitHub.
-* [ ] Implementar banco de dados relacional no PostgreSQL.
-* [x] Definir modelo ER e diagramas.
-* [ ] Criar backend para upload de CSV (já iniciado).
-* [ ] Configurar staging (`raw_json`).
-
-### 🔹 Etapa 2 — Integração com APIs
-
-* [ ] Implementar consulta ao **MedGen** para buscar doenças.
-* [ ] Integrar com **Gene** para mapear genes associados.
-* [ ] Consultar **ClinVar** para variações genéticas.
-* [ ] Obter detalhes dos SNPs via **dbSNP**.
-* [ ] Salvar payloads crus + dados transformados no banco.
-
-### 🔹 Etapa 3 — ETL Pipeline
-
-* [ ] Criar módulo ETL (ingestão → staging → transformação → carga).
-* [ ] Implementar logging de erros e sucessos.
-* [ ] Criar consultas SQL otimizadas.
-
-### 🔹 Etapa 4 — Frontend
-
-* [ ] Implementar tela de upload (Bootstrap).
-* [ ] Criar dashboard básico de resultados.
-* [ ] Exibir doenças, genes e riscos de forma clara.
-
-### 🔹 Etapa 5 — Documentação
-
-* [x] Criar README estruturado (este documento).
-* [x] Incluir diagramas de arquitetura e ER.
-* [ ] Adicionar queries de exemplo e prints de resultados.
-* [ ] Preparar apresentação.
-
----
-
 ## Melhorias Futuras (Nível Pleno → Avançado)
 
-* [ ] Adicionar **Airflow/Prefect** para orquestração do pipeline.
-* [ ] Exportar dados em **Parquet/JSON** simulando Data Lake.
-* [ ] Implementar **testes unitários** para parsing das APIs.
-* [ ] Containerização com **Docker** (Postgres + Backend).
-* [ ] Criar caching de consultas às APIs do NCBI.
-* [ ] Dashboard avançado (Gráficos + estatísticas por gene/doença).
+Adicionar **Airflow/Prefect** para orquestração do pipeline.
+Exportar dados em **Parquet/JSON** simulando Data Lake.
+Implementar **testes unitários** para parsing das APIs.
+Containerização com **Docker** (Postgres + Backend).
+Criar caching de consultas às APIs do NCBI.
+Dashboard avançado (Gráficos + estatísticas por gene/doença).
 
 ---
 
