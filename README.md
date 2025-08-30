@@ -162,12 +162,12 @@ erDiagram
 
 ## Melhorias Futuras (Nível Pleno → Avançado)
 
-Adicionar **Airflow/Prefect** para orquestração do pipeline.
-Exportar dados em **Parquet/JSON** simulando Data Lake.
-Implementar **testes unitários** para parsing das APIs.
-Containerização com **Docker** (Postgres + Backend).
-Criar caching de consultas às APIs do NCBI.
-Dashboard avançado (Gráficos + estatísticas por gene/doença).
+*Adicionar **Airflow/Prefect** para orquestração do pipeline.
+*Exportar dados em **Parquet/JSON** simulando Data Lake.
+*Implementar **testes unitários** para parsing das APIs.
+*Containerização com **Docker** (Postgres + Backend).
+*Criar caching de consultas às APIs do NCBI.
+*Dashboard avançado (Gráficos + estatísticas por gene/doença).
 
 ---
 
