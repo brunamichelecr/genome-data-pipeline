@@ -1,15 +1,16 @@
 // Paleta personalizada
-$color-titulos: #1C2A3A;
-$color-fundo: #ffffff;
-$color-primario: #A4D7B2;
-$color-info: #8EC6E6;
-$color-onboarding: #BCA8E3;
+$color-titulos: #1c2a3a;
+$color-fundo: #f2f4f3;
+$color-primario: #3e8e7e;
+$color-info: #3c7da6;
+$color-onboarding: #5e3a87;
 $color-secundario: #7A8A91;
 $color-intervalo: #e1e9ec;
 $font-family-base: 'Lato', sans-serif;
 
 // Importando Bootstrap com variáveis personalizadas
-@use "../node_modules/bootstrap/scss/bootstrap" with ($font-family-base: $font-family-base,
+@use "../node_modules/bootstrap/scss/bootstrap" with (
+    $font-family-base: $font-family-base,
     $primary: $color-primario,
     $secondary: $color-secundario,
     $info: $color-info,
@@ -21,6 +22,7 @@ body {
     font-family: 'Segoe UI', sans-serif;
     background-color: $color-fundo;
     color: $color-titulos;
+    padding-top: 58px;
 }
 
 .card {
@@ -42,60 +44,126 @@ body {
 
 
 // Navbar
-
 .navbar-custom {
-    background-color: $color-titulos; // fundo escuro
-    border-bottom: 2px solid $color-secundario;
+  background-color: $color-fundo !important;
+  border-bottom: 2px solid $color-onboarding;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1030;
 
-    .navbar-brand,
-    .nav-link {
-        color: $color-fundo; // texto claro
+  // Marca da navbar com SVG fixo
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    border: none;
 
-        &:hover {
-            color: $color-info; // destaque ao passar o mouse
-        }
+    img {
+      height: 40px; // ajuste conforme necessário
+      width: auto;
+      pointer-events: none;
+      user-select: none;
     }
 
-    .btn-primary {
-        background-color: $color-primario;
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+      box-shadow: none;
+      border: none;
+    }
+  }
+
+  // Links da navbar
+  .nav-link {
+    color: $color-info;
+    margin-left: 1rem;
+    font-weight: normal;
+    background-color: transparent;
+
+    &:hover {
+      color: $color-onboarding;
+    }
+
+    &:active,
+    &:focus {
+      color: $color-onboarding;
+      font-weight: bold;
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+    }
+
+    &.active {
+      color: $color-onboarding !important;
+      font-weight: bold;
+    }
+  }
+
+  // Ícone do menu hamburguer
+  .navbar-toggler {
+    border: $color-onboarding !important;
+    box-shadow: none !important;
+    padding: 0.5rem;
+    background-color: transparent;
+
+    &:focus,
+    &:active {
+      outline: none;
+      box-shadow: none !important;
+      border: none !important;
+    }
+
+
+  }
+
+    .btn-outline-light {
+        background-color: $color-onboarding;
         border: none;
 
         &:hover {
-            background-color: darken($color-primario, 10%);
+            background-color: darken($color-onboarding, 10%);
+            color: $color-fundo;
+        }
+        .btn-outline-light {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 1rem;
+            object-fit: contain;
         }
     }
-}
 
-.navbar-custom {
-    background-color: $color-titulos;
-    border-bottom: 2px solid $color-secundario;
-
-    .navbar-brand {
-        font-weight: bold;
-        color: $color-fundo;
-        font-size: 1.5rem;
-    }
+  // Menu colapsado no mobile
+  .navbar-collapse {
+    background-color: $color-fundo !important;
+    border: none !important;
+    box-shadow: none !important;
 
     .nav-link {
-        color: $color-fundo;
-        margin-left: 1rem;
+      color: $color-info !important;
 
-        &:hover {
-            color: $color-info;
-        }
+      &:hover {
+        color: $color-onboarding !important;
+      }
 
-        &.active {
-            font-weight: bold;
-            color: $color-primario !important;
-        }
+      &:focus,
+      &:active {
+        color: $color-onboarding !important;
+        font-weight: bold;
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+      }
+
+      &.active {
+        color: $color-onboarding !important;
+        font-weight: bold;
+      }
     }
+  }
 }
 
-.navbar-custom .nav-link.active {
-    color: $color-info !important;
-    background-color: transparent;
-    font-weight: bold;
-}
 
 //Hero Section
 .hero-section {
@@ -126,11 +194,17 @@ body {
     }
 
     .btn-primary {
-        background-color: $color-primario;
+        background-color: $color-onboarding;
         border: none;
 
         &:hover {
-            background-color: darken($color-primario, 10%);
+            background-color: darken($color-onboarding, 10%);
+        }
+        .btn-icon-img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 1rem;
+            object-fit: contain;
         }
     }
 }
@@ -291,11 +365,11 @@ body {
         }
 
         .btn-primary {
-            background-color: $color-primario;
+            background-color: $color-onboarding;
             border: none;
 
             &:hover {
-                background-color: darken($color-primario, 10%);
+                background-color: darken($color-onboarding, 10%);
             }
         }
     }
