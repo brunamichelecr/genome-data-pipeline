@@ -1,0 +1,403 @@
+// Paleta personalizada
+$color-titulos: #1C2A3A;
+$color-fundo: #ffffff;
+$color-primario: #A4D7B2;
+$color-info: #8EC6E6;
+$color-onboarding: #BCA8E3;
+$color-secundario: #7A8A91;
+$color-intervalo: #e1e9ec;
+$font-family-base: 'Lato', sans-serif;
+
+// Importando Bootstrap com variáveis personalizadas
+@use "../node_modules/bootstrap/scss/bootstrap" with ($font-family-base: $font-family-base,
+    $primary: $color-primario,
+    $secondary: $color-secundario,
+    $info: $color-info,
+    $body-bg: $color-fundo,
+    $body-color: $color-titulos);
+
+// Estilos personalizados
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: $color-fundo;
+    color: $color-titulos;
+}
+
+.card {
+    border: 1px solid $color-titulos;
+    background-color: $color-fundo;
+}
+
+.btn-custom {
+    background-color: $color-primario;
+    color: $color-titulos;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+
+    &:hover {
+        background-color: darken($color-primario, 10%);
+    }
+}
+
+
+// Navbar
+
+.navbar-custom {
+    background-color: $color-titulos; // fundo escuro
+    border-bottom: 2px solid $color-secundario;
+
+    .navbar-brand,
+    .nav-link {
+        color: $color-fundo; // texto claro
+
+        &:hover {
+            color: $color-info; // destaque ao passar o mouse
+        }
+    }
+
+    .btn-primary {
+        background-color: $color-primario;
+        border: none;
+
+        &:hover {
+            background-color: darken($color-primario, 10%);
+        }
+    }
+}
+
+.navbar-custom {
+    background-color: $color-titulos;
+    border-bottom: 2px solid $color-secundario;
+
+    .navbar-brand {
+        font-weight: bold;
+        color: $color-fundo;
+        font-size: 1.5rem;
+    }
+
+    .nav-link {
+        color: $color-fundo;
+        margin-left: 1rem;
+
+        &:hover {
+            color: $color-info;
+        }
+
+        &.active {
+            font-weight: bold;
+            color: $color-primario !important;
+        }
+    }
+}
+
+.navbar-custom .nav-link.active {
+    color: $color-info !important;
+    background-color: transparent;
+    font-weight: bold;
+}
+
+//Hero Section
+.hero-section {
+    background-image: url('../img/img1.jpg'); 
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    position: relative;
+    color: $color-fundo;
+
+    .hero-overlay {
+        background-color: rgba($color-titulos, 0.6); // leve escurecimento
+        padding: 2rem;
+        border-radius: 1rem;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        font-family: 'Lato', sans-serif;
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+        font-family: 'Lato', sans-serif;
+    }
+
+    .btn-primary {
+        background-color: $color-primario;
+        border: none;
+
+        &:hover {
+            background-color: darken($color-primario, 10%);
+        }
+    }
+}
+
+
+// Como funciona
+
+.how-it-works {
+    background-color: $color-fundo;
+    color: $color-titulos;
+
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: $color-primario;
+    }
+
+    .section-subtitle {
+        font-size: 1.2rem;
+        color: $color-info;
+    }
+
+    .step {
+        padding: 1rem;
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-icon-img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 1rem;
+            object-fit: contain;
+        }
+
+        h5 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 0.95rem;
+            color: $color-titulos;
+        }
+    }
+}
+
+
+
+// Benefícios
+
+.benefits-section {
+    padding: 4rem 1rem;
+    background-color: $color-intervalo; 
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+}
+
+.benefits-section h2 {
+    font-size: 2.5rem;
+    color: $color-primario;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.benefits-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    font-size: 1.1rem;
+    color: $color-titulos;
+    padding: 0 1rem;
+}
+
+.benefits-list li {
+    list-style: none;
+    background-color: $color-fundo;
+    border-left: 5px solid $color-secundario;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Delay para cada item */
+.benefits-list li:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.benefits-list li:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.benefits-list li:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.benefits-list li:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsividade para mobile */
+@media (max-width: 600px) {
+    .benefits-section h2 {
+        font-size: 1.75rem;
+    }
+
+    .benefits-list {
+        font-size: 1rem;
+    }
+
+    .benefits-list li {
+        padding: 1rem;
+    }
+}
+
+
+//envio
+
+.upload-section {
+    background-color: $color-fundo;
+    color: $color-titulos;
+    font-family: 'Lato', sans-serif;
+
+    h2 {
+        color: $color-primario;
+        font-weight: 700;
+        font-size: 2.5rem;
+    }
+
+    .upload-form {
+        max-width: 500px;
+        margin: 0 auto;
+
+        input[type="file"] {
+            border: 2px dashed $color-secundario;
+            padding: 1rem;
+            background-color: lighten($color-fundo, 5%);
+            border-radius: 0.5rem;
+            transition: border-color 0.3s ease;
+
+            &:hover {
+                border-color: $color-primario;
+            }
+        }
+
+        .btn-primary {
+            background-color: $color-primario;
+            border: none;
+
+            &:hover {
+                background-color: darken($color-primario, 10%);
+            }
+        }
+    }
+}
+
+
+
+//Depoimentos
+
+.testimonials-section {
+  background-color: $color-intervalo;
+  font-family: 'Lato', sans-serif;
+
+  h2 {
+    color: $color-primario;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+
+  .testimonial-card {
+    background-color: $color-fundo;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    .testimonial-avatar {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 0 3px $color-primario;
+        margin-bottom: 1rem;
+
+    }
+
+    .testimonial-text {
+      font-size: 1.1rem;
+      color: $color-titulos;
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    .testimonial-name {
+      font-weight: 600;
+      color: $color-secundario;
+    }
+  }
+
+  .row > div:nth-child(1) .testimonial-card { animation-delay: 0.2s; }
+  .row > div:nth-child(2) .testimonial-card { animation-delay: 0.4s; }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+
+//footer
+
+.site-footer {
+  background-color: $color-titulos;
+  color: $color-fundo;
+  font-family: 'Lato', sans-serif;
+
+  .footer-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: $color-primario;
+    margin-bottom: 1rem;
+  }
+
+  a {
+    color: $color-fundo;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $color-info;
+    }
+  }
+
+  hr {
+    border-color: lighten($color-titulos, 20%);
+  }
+
+  .text-muted {
+  color: rgba(255, 255, 255, 0.8) !important;
+
+    font-size: 0.9rem;
+
+  }
+}
