@@ -12231,4 +12231,245 @@ body {
   font-size: 0.9rem;
 }
 
+.login-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f2f4f3;
+  font-family: "Lato", sans-serif;
+}
+.login-page main {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.login-page .card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(28, 42, 58, 0.1);
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+.login-page .card h2 {
+  color: #1c2a3a;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.login-page .card .form-label {
+  color: #1c2a3a;
+  font-weight: 500;
+}
+.login-page .card .form-control {
+  border: 1px solid #e1e9ec;
+  border-radius: 6px;
+}
+.login-page .card .form-control:focus {
+  border-color: #3e8e7e;
+  box-shadow: 0 0 0 0.2rem rgba(62, 142, 126, 0.25);
+}
+.login-page .card .btn-primary {
+  background-color: #3e8e7e;
+  border: none;
+  font-weight: 600;
+}
+.login-page .card .btn-primary:hover {
+  background-color: rgb(46.5, 106.5, 94.5);
+}
+.login-page .card .btn-outline-primary {
+  color: #3e8e7e;
+  border: 1px solid #3e8e7e;
+  font-weight: 600;
+  background-color: transparent;
+}
+.login-page .card .btn-outline-primary:hover {
+  background-color: #3e8e7e;
+  color: white;
+}
+.login-page .card .btn + .btn {
+  margin-top: 0.5rem;
+}
+.login-page .card a {
+  color: #3c7da6;
+  font-size: 0.9rem;
+}
+.login-page .card a:hover {
+  text-decoration: underline;
+}
+
+.cadastro-page {
+  padding-top: 1px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f2f4f3;
+  font-family: "Lato", sans-serif;
+}
+.cadastro-page main {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+  padding-bottom: 40px;
+}
+.cadastro-page .card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(28, 42, 58, 0.1);
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+.cadastro-page .card h2 {
+  color: #1c2a3a;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.cadastro-page .card .form-label {
+  color: #1c2a3a;
+  font-weight: 500;
+}
+.cadastro-page .card .form-control {
+  border: 1px solid #e1e9ec;
+  border-radius: 6px;
+}
+.cadastro-page .card .form-control:focus {
+  border-color: #3e8e7e;
+  box-shadow: 0 0 0 0.2rem rgba(62, 142, 126, 0.25);
+}
+.cadastro-page .card .btn-primary {
+  background-color: #3e8e7e;
+  border: none;
+  font-weight: 600;
+}
+.cadastro-page .card .btn-primary:hover {
+  background-color: rgb(46.5, 106.5, 94.5);
+}
+.cadastro-page .card a {
+  color: #3c7da6;
+  font-size: 0.9rem;
+}
+.cadastro-page .card a:hover {
+  text-decoration: underline;
+}
+
+.contato-page {
+  background-color: #f2f4f3;
+  font-family: "Lato", sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.contato-page main {
+  flex-grow: 1;
+  padding-top: 100px;
+  padding-bottom: 40px;
+}
+.contato-page main h1 {
+  color: #1c2a3a;
+  font-weight: 700;
+  font-size: 2rem;
+}
+.contato-page main p.lead {
+  color: #7A8A91;
+  font-size: 1.1rem;
+}
+.contato-page main .list-group-item {
+  background-color: transparent;
+  border: none;
+  font-size: 1.1rem;
+  color: #1c2a3a;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.contato-page main .list-group-item span {
+  font-weight: 500;
+}
+.contato-page .btn-outline-primary {
+  color: #3e8e7e;
+  border-color: #3e8e7e;
+  font-weight: 600;
+}
+.contato-page .btn-outline-primary:hover {
+  background-color: #3e8e7e;
+  color: white;
+  border-color: #3e8e7e;
+}
+.contato-page .btn-outline-primary:focus {
+  box-shadow: 0 0 0 0.25rem rgba(62, 142, 126, 0.4);
+}
+
+.sobre-page {
+  background-color: #f2f4f3;
+  font-family: "Lato", sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.sobre-page main {
+  flex-grow: 1;
+  padding-top: 100px;
+  padding-bottom: 40px;
+}
+.sobre-page main h1 {
+  color: #1c2a3a;
+  font-weight: 700;
+  font-size: 2rem;
+  text-align: center;
+}
+.sobre-page main p {
+  color: #1c2a3a;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  text-align: justify;
+}
+.sobre-page main p.lead {
+  color: #7A8A91;
+  font-size: 1.2rem;
+}
+.sobre-page main p em {
+  color: #5e3a87;
+  font-style: italic;
+}
+.sobre-page main p strong {
+  color: #3e8e7e;
+  font-weight: 700;
+}
+.sobre-page main p a {
+  color: #3c7da6;
+  text-decoration: underline;
+}
+.sobre-page main p a:hover {
+  color: rgb(46.4601769912, 96.7920353982, 128.5398230088);
+}
+.sobre-page main ul {
+  padding-left: 1rem;
+  margin-top: 1rem;
+}
+.sobre-page main ul li {
+  color: #1c2a3a;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  text-align: justify;
+}
+.sobre-page main ul li a {
+  color: #3c7da6;
+  font-weight: 500;
+}
+.sobre-page main ul li a:hover {
+  text-decoration: underline;
+  color: rgb(46.4601769912, 96.7920353982, 128.5398230088);
+}
+
 /*# sourceMappingURL=style.css.map */
