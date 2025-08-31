@@ -2,72 +2,96 @@
 <html lang="pt-br">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sobre nós - DemoMind</title>
-  <link rel="icon" href="img/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/custom.css">
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sobre nós - DemoMind</title>
+    <link rel="icon" href="img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 
 <body class="sobre-page d-flex flex-column min-vh-100">
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">
-        <img src="img/logo.svg" alt="DemoMind" height="40" />
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="cadastro.html">Carregar dados</a></li>
-          <li class="nav-item"><a class="nav-link" href="login.html">Resultados</a></li>
-          <li class="nav-item"><a class="nav-link active" href="sobre.html">Sobre nós</a></li>
-          <li class="nav-item"><a class="nav-link" href="contato.html">Contato</a></li>
-          <a href="login.html" class="btn btn-outline-light ms-lg-3">Entrar</a>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="img/logo.svg" alt="DemoMind" height="40" />
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cadastro.html">Carregar dados</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Resultados</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="sobre.html">Sobre nós</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contato.html">Contato</a></li>
+                    <a href="login.html" class="btn btn-outline-light ms-lg-3">Entrar</a>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-  <!-- Conteúdo principal -->
-  <main class="flex-grow-1 container" style="padding-top: 100px; padding-bottom: 40px;">
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <h1 class="mb-4 text-center">Quem somos nós</h1>
-        <p class="lead">
-          O <strong>DemoMind</strong> é um projeto idealizado e desenvolvido por <strong>Bruna Michele</strong>, engenheira de dados apaixonada por tecnologia, ciência e saúde personalizada. Com formação sólida e experiência prática em engenharia de dados, Bruna criou este pipeline com o objetivo de tornar a análise genética mais acessível, compreensível e útil para qualquer pessoa interessada em entender o que seu DNA pode revelar sobre sua saúde.
-        </p>
-        <p class="lead">
-          Este projeto nasceu da união entre curiosidade científica e propósito social. Em um mundo onde os dados genéticos estão cada vez mais disponíveis, mas muitas vezes inacessíveis em termos de interpretação, o DemoMind propõe uma solução prática: permitir que qualquer usuário envie seu arquivo de SNPs (rsIDs) e receba uma análise clara e visual sobre doenças associadas, genes impactados e riscos genéticos.
-        </p>
-        <p class="lead">
-          A plataforma integra diversas fontes confiáveis como <em>NCBI</em>, <em>ClinVar</em> e <em>dbSNP</em>, estruturando os dados em um banco relacional e apresentando os resultados em um dashboard intuitivo. Tudo isso foi construído com tecnologias modernas como <strong>Python, Flask, PostgreSQL e Bootstrap</strong>, e está disponível como código aberto no <a href="https://github.com/brunamichelecr/genome-data-pipeline/tree/frontend" target="_blank">repositório oficial do projeto</a>.
-        </p>
-        <p class="lead">
-          Além de ser uma vitrine técnica de engenharia de dados, com ETL completo, boas práticas de logging, rastreabilidade e documentação, o DemoMind é também um convite à reflexão: <em>como podemos usar nossos dados genéticos de forma ética, segura e informada para cuidar melhor da nossa saúde?</em>
-        </p>
-        <p class="lead">
-          Se você quiser acompanhar o desenvolvimento ou contribuir com ideias, você pode encontrar Bruna nas redes:
-        </p>
-        <ul>
-          <li><img width="30" height="30" src="https://img.icons8.com/color/48/linkedin.png" alt="linkedin"/> <a href="https://www.linkedin.com/in/brunamcr" target="_blank">LinkedIn</a></li>
-          <li><img width="30" height="30" src="https://img.icons8.com/ios-filled/50/github.png" alt="github"/> <a href="https://github.com/brunamichelecr" target="_blank">GitHub</a></li>
-          <li><img width="30" height="30" src="https://img.icons8.com/color/48/gmail-new.png" alt="gmail-new"/> <a href="mailto:brunamichelecr@gmail.com">brunamichelecr@gmail.com</a></li>
-        </ul>
-      </div>
+    <!-- Conteúdo principal -->
+    <main class="flex-grow-1 container" style="padding-top: 100px; padding-bottom: 40px;">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="mb-4 text-center">Quem somos nós</h1>
+                <p class="lead">
+                    O <strong>DemoMind</strong> é um projeto idealizado e desenvolvido por <strong>Bruna
+                        Michele</strong>, engenheira de dados apaixonada por tecnologia, ciência e saúde personalizada.
+                    Com formação sólida e experiência prática em engenharia de dados, Bruna criou este pipeline com o
+                    objetivo de tornar a análise genética mais acessível, compreensível e útil para qualquer pessoa
+                    interessada em entender o que seu DNA pode revelar sobre sua saúde.
+                </p>
+                <p class="lead">
+                    Este projeto nasceu da união entre curiosidade científica e propósito social. Em um mundo onde os
+                    dados genéticos estão cada vez mais disponíveis, mas muitas vezes inacessíveis em termos de
+                    interpretação, o DemoMind propõe uma solução prática: permitir que qualquer usuário envie seu
+                    arquivo de SNPs (rsIDs) e receba uma análise clara e visual sobre doenças associadas, genes
+                    impactados e riscos genéticos.
+                </p>
+                <p class="lead">
+                    A plataforma integra diversas fontes confiáveis como <em>NCBI</em>, <em>ClinVar</em> e
+                    <em>dbSNP</em>, estruturando os dados em um banco relacional e apresentando os resultados em um
+                    dashboard intuitivo. Tudo isso foi construído com tecnologias modernas como <strong>Python, Flask,
+                        PostgreSQL e Bootstrap</strong>, e está disponível como código aberto no <a
+                        href="https://github.com/brunamichelecr/genome-data-pipeline/tree/frontend"
+                        target="_blank">repositório oficial do projeto</a>.
+                </p>
+                <p class="lead">
+                    Além de ser uma vitrine técnica de engenharia de dados, com ETL completo, boas práticas de logging,
+                    rastreabilidade e documentação, o DemoMind é também um convite à reflexão: <em>como podemos usar
+                        nossos dados genéticos de forma ética, segura e informada para cuidar melhor da nossa
+                        saúde?</em>
+                </p>
+                <p class="lead">
+                    Se você quiser acompanhar o desenvolvimento ou contribuir com ideias, você pode encontrar Bruna nas
+                    redes:
+                </p>
+                <ul>
+                    <li><img width="30" height="30" src="https://img.icons8.com/color/48/linkedin.png" alt="linkedin" />
+                        <a href="https://www.linkedin.com/in/brunamcr" target="_blank">LinkedIn</a></li>
+                    <li><img width="30" height="30" src="https://img.icons8.com/ios-filled/50/github.png"
+                            alt="github" /> <a href="https://github.com/brunamichelecr" target="_blank">GitHub</a></li>
+                    <li><img width="30" height="30" src="https://img.icons8.com/color/48/gmail-new.png"
+                            alt="gmail-new" /> <a href="mailto:brunamichelecr@gmail.com">brunamichelecr@gmail.com</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    <div class="cookie-banner">
+        Este site utiliza cookies para melhorar sua experiência. <a href="#">Saiba mais</a>
+        <button class="btn btn-sm btn-primary ms-2">Aceitar</button>
     </div>
-  </main>
-
- <!-- Rodapé -->
-  <footer class="site-footer py-5">
+    <!-- Rodapé -->
+    <footer class="site-footer py-5">
         <div class="container">
             <div class="row text-center text-md-start">
                 <!-- Links úteis -->
@@ -110,10 +134,14 @@
             </div>
         </div>
     </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-    crossorigin="anonymous"></script>
+    <script>
+        document.querySelector('.cookie-banner .btn').addEventListener('click', function () {
+            document.querySelector('.cookie-banner').style.display = 'none';
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

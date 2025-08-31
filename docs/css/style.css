@@ -12472,4 +12472,32 @@ body {
   color: rgb(46.4601769912, 96.7920353982, 128.5398230088);
 }
 
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #7A8A91;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  z-index: 1050;
+}
+.cookie-banner a {
+  color: #3c7da6;
+  text-decoration: underline;
+}
+.cookie-banner a:hover {
+  color: rgb(83.8584070796, 150.8716814159, 193.1415929204);
+}
+.cookie-banner .btn {
+  background-color: #3e8e7e;
+  border: none;
+  font-size: 0.8rem;
+}
+.cookie-banner .btn:hover {
+  background-color: rgb(46.5, 106.5, 94.5);
+}
+
 /*# sourceMappingURL=style.css.map */

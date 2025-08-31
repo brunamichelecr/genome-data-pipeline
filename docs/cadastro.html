@@ -65,7 +65,10 @@
             </form>
         </div>
     </div>
-
+    <div class="cookie-banner">
+        Este site utiliza cookies para melhorar sua experiência. <a href="#">Saiba mais</a>
+        <button class="btn btn-sm btn-primary ms-2">Aceitar</button>
+    </div>
     <footer class="site-footer py-5">
         <div class="container">
             <div class="row text-center text-md-start">
@@ -111,7 +114,11 @@
     </footer>
 
 
-
+    <script>
+        document.querySelector('.cookie-banner .btn').addEventListener('click', function () {
+            document.querySelector('.cookie-banner').style.display = 'none';
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"

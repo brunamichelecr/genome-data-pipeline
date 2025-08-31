@@ -785,3 +785,35 @@ body {
 
 
 }
+
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: $color-secundario;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  z-index: 1050; 
+
+  a {
+    color: $color-info;
+    text-decoration: underline;
+
+    &:hover {
+      color: lighten($color-info, 10%);
+    }
+  }
+
+  .btn {
+    background-color: $color-primario;
+    border: none;
+    font-size: 0.8rem;
+
+    &:hover {
+      background-color: darken($color-primario, 10%);
+    }
+  }
+}
