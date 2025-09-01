@@ -14,7 +14,8 @@ CREATE TABLE diseases (
   disease_name VARCHAR(100),            -- Nome da doença
   disease_desc TEXT                      -- Descrição detalhada
   disease_name_pt VARCHAR(100),  -- Nome da doença em português
-  disease_synonym TEXT;                  -- Sinônimos em inglês (uso interno)
+  disease_synonym TEXT,                  -- Sinônimos em inglês (uso interno)
+  mesh_id VARCHAR(15);                    -- Identificador da doença no MeSH
 );
 
 -- Tabela de genes associados às doenças

@@ -89,10 +89,10 @@ def update_disease_info():
                 disease_name
             ))
 
-            print(f"✅ Atualizado: {disease_name}")
+            print(f"Atualizado: {disease_name}")
         else:
             # Caso não encontre dados MeSH
-            print(f"⚠️ Não encontrado: {disease_name}")
+            print(f"Não encontrado: {disease_name}")
 
         # Pausa entre requisições para evitar sobrecarga na API da NCBI
         time.sleep(0.4)
