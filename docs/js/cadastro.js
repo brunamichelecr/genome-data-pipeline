@@ -10,28 +10,43 @@ document.getElementById('cadastro-form').addEventListener('submit', async functi
 
   const senhaValida = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-  // Validações
+  // Validações básicas
+  if (!nome || !genero || !email || !senha || !confirmar) {
+    mostrarMensagem('Todos os campos são obrigatórios.');
+    return;
+  }
+
   if (!termos) {
-    alert('Você precisa concordar com os termos de uso e política de privacidade.');
+    mostrarMensagem('Você precisa concordar com os termos de uso e política de privacidade.');
     return;
   }
 
   if (!senhaValida.test(senha)) {
-    alert('A senha deve conter pelo menos 8 caracteres, incluindo letras e números.');
+    mostrarMensagem('A senha deve conter pelo menos 8 caracteres, incluindo letras e números.');
     return;
   }
 
   if (senha !== confirmar) {
-    alert('As senhas não coincidem.');
+    mostrarMensagem('As senhas não coincidem.');
     return;
   }
 
-  if (!nome || !genero || !email || !senha) {
-    alert('Todos os campos são obrigatórios.');
+  // Verificação de e-mail duplicado
+  try {
+    const verificar = await fetch(`http://localhost:5000/api/verificar-email?email=${encodeURIComponent(email)}`);
+    const resultadoVerificacao = await verificar.json();
+
+    if (resultadoVerificacao.existe) {
+      mostrarMensagem('Este e-mail já está cadastrado. Por favor, use outro.', 'warning');
+      return;
+    }
+  } catch (erro) {
+    console.error('Erro ao verificar e-mail:', erro);
+    mostrarMensagem('Erro ao verificar e-mail. Tente novamente mais tarde.');
     return;
   }
 
-  // Envio para o backend Python
+  // Envio para o backend
   try {
     const resposta = await fetch('http://localhost:5000/api/cadastro', {
       method: 'POST',
@@ -42,17 +57,24 @@ document.getElementById('cadastro-form').addEventListener('submit', async functi
     const resultado = await resposta.json();
 
     if (resposta.ok) {
-      alert(resultado.mensagem);
+      mostrarMensagem(resultado.mensagem, 'success');
       document.getElementById('cadastro-form').reset();
     } else {
-      alert(resultado.erro || resultado.mensagem);
+      mostrarMensagem(resultado.erro || resultado.mensagem);
     }
   } catch (erro) {
     console.error('Erro ao enviar dados:', erro);
-    alert('Erro ao conectar com o servidor. Tente novamente mais tarde.');
+    mostrarMensagem('Erro ao conectar com o servidor. Tente novamente mais tarde.');
   }
 });
 
+// Função para exibir mensagens estilizadas
+function mostrarMensagem(texto, tipo = 'danger') {
+  const msg = document.getElementById('mensagem-feedback');
+  msg.textContent = texto;
+  msg.className = `alert alert-${tipo}`;
+  msg.classList.remove('d-none');
+}
 document.querySelector('.cookie-banner .btn').addEventListener('click', function () {
   document.querySelector('.cookie-banner').style.display = 'none';
 });
