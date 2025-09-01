@@ -1,10 +1,11 @@
 -- Tabela de usuários do sistema
 CREATE TABLE usuarios (
-    id_usuario SERIAL PRIMARY KEY,         -- Identificador único do usuário
-    login VARCHAR(50) NOT NULL,            -- Nome de login
-    senha VARCHAR(100) NOT NULL,           -- Senha criptografada
-    sexo CHAR(1),                          -- Sexo (M/F/O)
-    nome_user VARCHAR(100)                 -- Nome completo do usuário
+  id_usuario SERIAL PRIMARY KEY,         -- Identificador único do usuário
+  nome TEXT NOT NULL,                    -- Nome completo do usuário
+  genero TEXT NOT NULL,                  -- Sexo (M/F/O/N)
+  email TEXT UNIQUE NOT NULL,            -- Nome de login
+  senha_hash TEXT NOT NULL,              -- Senha criptografada
+  criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Tabela de doenças genéticas
