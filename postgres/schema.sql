@@ -13,6 +13,8 @@ CREATE TABLE diseases (
   id_disease SERIAL PRIMARY KEY,        -- Identificador único da doença
   disease_name VARCHAR(100),            -- Nome da doença
   disease_desc TEXT                      -- Descrição detalhada
+  disease_name_pt VARCHAR(100),  -- Nome da doença em português
+  disease_synonym TEXT;                  -- Sinônimos em inglês (uso interno)
 );
 
 -- Tabela de genes associados às doenças
