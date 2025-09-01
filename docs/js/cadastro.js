@@ -1,6 +1,8 @@
+// Listener para o evento de submit do formulário de cadastro
 document.getElementById('cadastro-form').addEventListener('submit', async function (e) {
-  e.preventDefault();
+  e.preventDefault(); // Evita recarregar a página
 
+  // Captura dos valores do formulário
   const nome = document.getElementById('nome').value.trim();
   const genero = document.getElementById('genero').value;
   const email = document.getElementById('email').value.trim();
@@ -8,9 +10,12 @@ document.getElementById('cadastro-form').addEventListener('submit', async functi
   const confirmar = document.getElementById('confirmar-senha').value;
   const termos = document.getElementById('termos').checked;
 
+  // Regex para validar senha (mínimo 8 caracteres, pelo menos 1 letra e 1 número)
   const senhaValida = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
+  // ----------------------------
   // Validações básicas
+  // ----------------------------
   if (!nome || !genero || !email || !senha || !confirmar) {
     mostrarMensagem('Todos os campos são obrigatórios.');
     return;
@@ -31,7 +36,9 @@ document.getElementById('cadastro-form').addEventListener('submit', async functi
     return;
   }
 
-  // Verificação de e-mail duplicado
+  // ----------------------------
+  // Verificação de e-mail duplicado no backend
+  // ----------------------------
   try {
     const verificar = await fetch(`http://localhost:5000/api/verificar-email?email=${encodeURIComponent(email)}`);
     const resultadoVerificacao = await verificar.json();
@@ -46,7 +53,9 @@ document.getElementById('cadastro-form').addEventListener('submit', async functi
     return;
   }
 
-  // Envio para o backend
+  // ----------------------------
+  // Envio dos dados para o backend (cadastro)
+  // ----------------------------
   try {
     const resposta = await fetch('http://localhost:5000/api/cadastro', {
       method: 'POST',
@@ -58,7 +67,7 @@ document.getElementById('cadastro-form').addEventListener('submit', async functi
 
     if (resposta.ok) {
       mostrarMensagem(resultado.mensagem, 'success');
-      document.getElementById('cadastro-form').reset();
+      document.getElementById('cadastro-form').reset(); // Limpa o formulário após sucesso
     } else {
       mostrarMensagem(resultado.erro || resultado.mensagem);
     }
@@ -68,13 +77,19 @@ document.getElementById('cadastro-form').addEventListener('submit', async functi
   }
 });
 
-// Função para exibir mensagens estilizadas
+// ----------------------------
+// Função utilitária para exibir mensagens no frontend
+// ----------------------------
 function mostrarMensagem(texto, tipo = 'danger') {
   const msg = document.getElementById('mensagem-feedback');
   msg.textContent = texto;
-  msg.className = `alert alert-${tipo}`;
+  msg.className = `alert alert-${tipo}`; // Usa classes de alerta (ex: Bootstrap)
   msg.classList.remove('d-none');
 }
+
+// ----------------------------
+// Banner de cookies (UX)
+// ----------------------------
 document.querySelector('.cookie-banner .btn').addEventListener('click', function () {
   document.querySelector('.cookie-banner').style.display = 'none';
 });

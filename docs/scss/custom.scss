@@ -8,7 +8,9 @@
   Local: Osasco, São Paulo, Brasil
 */
 
-// Paleta personalizada
+// ==========================
+// Variáveis de cores e fontes
+// ==========================
 $color-titulos: #1c2a3a;
 $color-fundo: #f2f4f3;
 $color-primario: #3e8e7e;
@@ -18,7 +20,9 @@ $color-secundario: #7A8A91;
 $color-intervalo: #e1e9ec;
 $font-family-base: 'Lato', sans-serif;
 
-// Importando Bootstrap com variáveis personalizadas
+// ==========================
+// Bootstrap com variáveis personalizadas
+// ==========================
 @use "../node_modules/bootstrap/scss/bootstrap" with ($font-family-base: $font-family-base,
   $primary: $color-primario,
   $secondary: $color-secundario,
@@ -26,7 +30,11 @@ $font-family-base: 'Lato', sans-serif;
   $body-bg: $color-fundo,
   $body-color: $color-titulos);
 
-// Estilos personalizados
+// ==========================
+// Estilos globais
+// ==========================
+/* Define a fonte, cor de fundo, cor do texto e adiciona espaçamento superior
+   para compensar a navbar fixa */
 body {
   font-family: 'Segoe UI', sans-serif;
   background-color: $color-fundo;
@@ -34,11 +42,16 @@ body {
   padding-top: 58px;
 }
 
+/* ===== Cards =====
+   Estilo básico dos cards: borda sutil e fundo igual ao da página */
 .card {
   border: 1px solid $color-titulos;
   background-color: $color-fundo;
 }
 
+/* ===== Botões customizados =====
+   Botões com cor de fundo principal, texto contrastante, cantos arredondados
+   e efeito de escurecimento ao passar o mouse */
 .btn-custom {
   background-color: $color-primario;
   color: $color-titulos;
@@ -52,56 +65,38 @@ body {
 }
 
 
+// ==========================
 // Navbar
+// ==========================
+/*   Define o estilo geral da navbar fixa: cor de fundo, borda inferior,
+   sombra e posicionamento acima de outros elementos (z-index) */
 .navbar-custom {
   background-color: $color-fundo !important;
   border-bottom: 2px solid $color-onboarding;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1030;
 
-  // Marca da navbar com SVG fixo
-  .navbar-brand {
-    display: flex;
-    align-items: center;
-    padding: 0;
-    margin: 0;
-    outline: none;
-    border: none;
-
-    img {
-      height: 40px; // ajuste conforme necessário
-      width: auto;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    &:hover,
-    &:focus,
-    &:active {
-      outline: none;
-      box-shadow: none;
-      border: none;
-    }
+  /* ===== Logo da marca =====
+     Ajusta tamanho da imagem e impede interação/seleção */
+  .navbar-brand img {
+    height: 40px;
+    width: auto;
+    pointer-events: none;
+    user-select: none;
   }
 
-  // Links da navbar
+  /* ===== Links da navbar =====
+     Define cores, espaçamento e estados (hover, focus, ativo) */
   .nav-link {
     color: $color-info;
     margin-left: 1rem;
     font-weight: normal;
-    background-color: transparent;
 
-    &:hover {
-      color: $color-onboarding;
-    }
-
-    &:active,
-    &:focus {
+    &:hover,
+    &:focus,
+    &:active {
       color: $color-onboarding;
       font-weight: bold;
-      background-color: transparent;
-      border: none;
-      box-shadow: none;
     }
 
     &.active {
@@ -110,23 +105,22 @@ body {
     }
   }
 
-  // Ícone do menu hamburguer
+  /* ===== Botão hamburguer (mobile) =====
+     Estilo do botão de colapso, sem borda ou destaque ao focar */
   .navbar-toggler {
     border: $color-onboarding !important;
-    box-shadow: none !important;
-    padding: 0.5rem;
     background-color: transparent;
 
     &:focus,
     &:active {
       outline: none;
-      box-shadow: none !important;
+      box-shadow: none;
       border: none !important;
     }
-
-
   }
 
+  /* ===== Botão de ação (ex: login) =====
+     Fundo principal da marca e efeito hover */
   .btn-outline-light {
     background-color: $color-onboarding;
     border: none;
@@ -135,47 +129,24 @@ body {
       background-color: darken($color-onboarding, 10%);
       color: $color-fundo;
     }
-
-    .btn-outline-light {
-      width: 50px;
-      height: 50px;
-      margin-bottom: 1rem;
-      object-fit: contain;
-    }
   }
 
-  // Menu colapsado no mobile
+  /* ===== Navbar colapsada no mobile =====
+     Mantém o fundo consistente e cores dos links */
   .navbar-collapse {
     background-color: $color-fundo !important;
-    border: none !important;
-    box-shadow: none !important;
 
     .nav-link {
       color: $color-info !important;
-
-      &:hover {
-        color: $color-onboarding !important;
-      }
-
-      &:focus,
-      &:active {
-        color: $color-onboarding !important;
-        font-weight: bold;
-        background-color: transparent;
-        border: none;
-        box-shadow: none;
-      }
-
-      &.active {
-        color: $color-onboarding !important;
-        font-weight: bold;
-      }
     }
   }
 }
 
-
-//Hero Section
+// ==========================
+// Hero Section
+// ==========================
+/* Define a área principal de destaque da página com imagem de fundo,
+   cobertura total, centralização e altura definida */
 .hero-section {
   background-image: url('../img/img1.jpg');
   background-size: cover;
@@ -184,25 +155,34 @@ body {
   position: relative;
   color: $color-fundo;
 
+  /* ===== Overlay do Hero =====
+     Camada semitransparente sobre a imagem para destacar conteúdo,
+     com padding interno e bordas arredondadas */
   .hero-overlay {
-    background-color: rgba($color-titulos, 0.6); // leve escurecimento
+    background-color: rgba($color-titulos, 0.6);
     padding: 2rem;
     border-radius: 1rem;
   }
 
+  /* ===== Título do Hero =====
+     Define tamanho, peso, família de fonte e espaçamento inferior */
   .hero-title {
     font-size: 3rem;
     font-weight: 700;
+    font-family: $font-family-base;
     margin-bottom: 1rem;
-    font-family: 'Lato', sans-serif;
   }
 
+  /* ===== Subtítulo do Hero =====
+     Texto complementar com tamanho menor e espaçamento maior */
   .hero-subtitle {
     font-size: 1.25rem;
     margin-bottom: 2rem;
-    font-family: 'Lato', sans-serif;
+    font-family: $font-family-base;
   }
 
+  /* ===== Botão principal do Hero =====
+     Estilo de cor de fundo, sem borda, com efeito hover */
   .btn-primary {
     background-color: $color-onboarding;
     border: none;
@@ -210,54 +190,52 @@ body {
     &:hover {
       background-color: darken($color-onboarding, 10%);
     }
-
-    .btn-icon-img {
-      width: 50px;
-      height: 50px;
-      margin-bottom: 1rem;
-      object-fit: contain;
-    }
   }
 }
 
-
+// ==========================
 // Como funciona
-
+// ==========================
+/* Área que explica o funcionamento do serviço ou processo,
+   com fundo e cor de texto padrão */
 .how-it-works {
   background-color: $color-fundo;
   color: $color-titulos;
 
+  /* ===== Título da seção =====
+     Texto grande e destacado com cor primária */
   .section-title {
     font-size: 2.5rem;
     font-weight: 700;
     color: $color-primario;
   }
 
+  /* ===== Subtítulo da seção =====
+     Texto menor, informativo, com cor de destaque secundária */
   .section-subtitle {
     font-size: 1.2rem;
     color: $color-info;
   }
 
+  /* ===== Passos individuais =====
+     Cada passo tem padding e efeito de animação ao passar o mouse */
   .step {
     padding: 1rem;
     transition: transform 0.3s ease;
 
     &:hover {
-      transform: translateY(-5px);
+      transform: translateY(-5px); // levanta o passo visualmente ao hover
     }
 
-    .step-icon-img {
-      width: 50px;
-      height: 50px;
-      margin-bottom: 1rem;
-      object-fit: contain;
-    }
-
+    /* ===== Título do passo =====
+       Peso médio e espaçamento inferior para separar do texto */
     h5 {
       font-weight: 600;
       margin-bottom: 0.5rem;
     }
 
+    /* ===== Descrição do passo =====
+       Texto informativo com tamanho menor e cor padrão */
     p {
       font-size: 0.95rem;
       color: $color-titulos;
@@ -266,63 +244,61 @@ body {
 }
 
 
-
+// ==========================
 // Benefícios
-
+// ==========================
+/* Área que lista os principais benefícios ou vantagens do serviço,
+   com espaçamento generoso e alinhamento centralizado */
 .benefits-section {
   padding: 4rem 1rem;
   background-color: $color-intervalo;
   text-align: center;
-  font-family: 'Lato', sans-serif;
+
+  /* ===== Título da seção =====
+     Texto grande, em cor primária, com espaçamento inferior */
+  h2 {
+    font-size: 2.5rem;
+    color: $color-primario;
+    margin-bottom: 2rem;
+    font-weight: 700;
+  }
+
+  /* ===== Lista de benefícios =====
+     Contêiner centralizado e coluna flexível com espaçamento */
+  .benefits-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    font-size: 1.1rem;
+
+    /* ===== Item individual da lista =====
+       Cartão com fundo, borda lateral, padding e sombra,
+       animação de entrada suave (fadeInUp) */
+    li {
+      list-style: none;
+      background-color: $color-fundo;
+      border-left: 5px solid $color-secundario;
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    /* ===== Delay de animação para cada item =====
+       Cria efeito de entrada escalonada */
+    li:nth-child(1) { animation-delay: 0.2s; }
+    li:nth-child(2) { animation-delay: 0.4s; }
+    li:nth-child(3) { animation-delay: 0.6s; }
+    li:nth-child(4) { animation-delay: 0.8s; }
+  }
 }
 
-.benefits-section h2 {
-  font-size: 2.5rem;
-  color: $color-primario;
-  margin-bottom: 2rem;
-  font-weight: 700;
-}
-
-.benefits-list {
-  max-width: 800px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  font-size: 1.1rem;
-  color: $color-titulos;
-  padding: 0 1rem;
-}
-
-.benefits-list li {
-  list-style: none;
-  background-color: $color-fundo;
-  border-left: 5px solid $color-secundario;
-  padding: 1rem 1.5rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease forwards;
-}
-
-/* Delay para cada item */
-.benefits-list li:nth-child(1) {
-  animation-delay: 0.2s;
-}
-
-.benefits-list li:nth-child(2) {
-  animation-delay: 0.4s;
-}
-
-.benefits-list li:nth-child(3) {
-  animation-delay: 0.6s;
-}
-
-.benefits-list li:nth-child(4) {
-  animation-delay: 0.8s;
-}
-
+/* ===== Animação fadeInUp =====
+   Transição de elementos de baixo para cima com opacidade */
 @keyframes fadeInUp {
   to {
     opacity: 1;
@@ -330,39 +306,37 @@ body {
   }
 }
 
-/* Responsividade para mobile */
-@media (max-width: 600px) {
-  .benefits-section h2 {
-    font-size: 1.75rem;
-  }
-
-  .benefits-list {
-    font-size: 1rem;
-  }
-
-  .benefits-list li {
-    padding: 1rem;
-  }
+/* ===== Responsividade =====
+   Ajusta título e tamanho de fonte da lista em telas pequenas */
+@media (max-width:600px) {
+  .benefits-section h2 { font-size: 1.75rem; }
+  .benefits-list { font-size: 1rem; }
 }
 
+// ==========================
+// Upload
+// ==========================
+/* Aplica a fonte base definida em todas as seções listadas */
+.upload-section,
+.testimonials-section,
+.site-footer {
+  font-family: $font-family-base;
+}
 
-//envio
-
+/* ===== Seção de Upload =====
+   Área onde o usuário envia arquivos, com cores e estilo de fundo consistentes */
 .upload-section {
   background-color: $color-fundo;
   color: $color-titulos;
-  font-family: 'Lato', sans-serif;
 
-  h2 {
-    color: $color-primario;
-    font-weight: 700;
-    font-size: 2.5rem;
-  }
-
+  /* ===== Formulário de envio =====
+     Centralizado e com largura máxima para melhor layout */
   .upload-form {
     max-width: 500px;
     margin: 0 auto;
 
+    /* ===== Input de arquivo =====
+       Estilo com borda tracejada, padding e leve destaque ao passar o mouse */
     input[type="file"] {
       border: 2px dashed $color-secundario;
       padding: 1rem;
@@ -375,6 +349,8 @@ body {
       }
     }
 
+    /* ===== Botão principal do formulário =====
+       Cor de fundo customizada e hover com escurecimento */
     .btn-primary {
       background-color: $color-onboarding;
       border: none;
@@ -388,18 +364,24 @@ body {
 
 
 
-//Depoimentos
+// ==========================
+// Depoimentos
+// ==========================
 
+/* Define o fundo e as cores gerais da seção */
 .testimonials-section {
   background-color: $color-intervalo;
-  font-family: 'Lato', sans-serif;
 
+  /* ===== Título da seção =====
+     Estilo grande, com cor primária e peso forte */
   h2 {
     color: $color-primario;
     font-size: 2.5rem;
     font-weight: 700;
   }
 
+  /* ===== Cartões de depoimento =====
+     Fundo branco, cantos arredondados, sombra leve e animação de entrada */
   .testimonial-card {
     background-color: $color-fundo;
     border-radius: 0.75rem;
@@ -409,33 +391,41 @@ body {
     transform: translateY(20px);
     animation: fadeInUp 0.6s ease forwards;
 
+    /* Efeito de hover para levantar o cartão */
     &:hover {
       transform: translateY(-5px);
     }
-
-    .testimonial-avatar {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 0 0 3px $color-primario;
-      margin-bottom: 1rem;
-
-    }
-
-    .testimonial-text {
-      font-size: 1.1rem;
-      color: $color-titulos;
-      font-style: italic;
-      margin-bottom: 1rem;
-    }
-
-    .testimonial-name {
-      font-weight: 600;
-      color: $color-secundario;
-    }
   }
 
+  /* ===== Avatar do usuário =====
+     Imagem circular, tamanho fixo, com borda e sombra */
+  .testimonial-avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 0 3px $color-primario;
+    margin-bottom: 1rem;
+  }
+
+  /* ===== Texto do depoimento =====
+     Estilo em itálico, tamanho médio e cor de destaque */
+  .testimonial-text {
+    font-size: 1.1rem;
+    color: $color-titulos;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  /* ===== Nome do usuário =====
+     Peso médio e cor secundária */
+  .testimonial-name {
+    font-weight: 600;
+    color: $color-secundario;
+  }
+
+  /* ===== Delay da animação dos cartões =====
+     Cartões entram com tempos diferentes para efeito visual em sequência */
   .row>div:nth-child(1) .testimonial-card {
     animation-delay: 0.2s;
   }
@@ -445,24 +435,16 @@ body {
   }
 }
 
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-
-
-
-//footer
-
+// ==========================
+// Footer
+// ==========================
+/* Define cores de fundo e texto do footer */
 .site-footer {
-  background-color: $color-titulos;
-  color: $color-fundo;
-  font-family: 'Lato', sans-serif;
+  background-color: $color-titulos;  // fundo escuro
+  color: $color-fundo;               // texto claro
 
+  /* ===== Títulos internos do footer =====
+     Destaque com cor primária e peso */
   .footer-title {
     font-size: 1.2rem;
     font-weight: 700;
@@ -470,344 +452,112 @@ body {
     margin-bottom: 1rem;
   }
 
+  /* ===== Links do footer =====
+     Cor clara por padrão, muda ao passar o mouse */
   a {
     color: $color-fundo;
     text-decoration: none;
-    transition: color 0.3s ease;
 
     &:hover {
       color: $color-info;
     }
   }
 
+  /* ===== Linha horizontal =====
+     Bordas levemente mais claras que o fundo */
   hr {
     border-color: lighten($color-titulos, 20%);
   }
 
+  /* ===== Texto secundário / informativo =====
+     Cor semi-transparente e fonte menor */
   .text-muted {
     color: rgba(255, 255, 255, 0.8) !important;
-
     font-size: 0.9rem;
-
   }
 }
 
 
-// Estilos específicos para a página de login
-
-
-.login-page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: $color-fundo;
+// ==========================
+// Páginas específicas
+// ==========================
+/* ===== Estrutura base das páginas principais =====
+   Define fonte, altura mínima e layout flexível para todas as páginas */
+.login-page,
+.cadastro-page,
+.contato-page,
+.sobre-page,
+.resultados-page {
   font-family: $font-family-base;
-
-  main {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    padding-top: 40px;
-    padding-bottom: 40px;
-  }
-
-  .card {
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba($color-titulos, 0.1);
-    padding: 2rem;
-    max-width: 400px;
-    width: 100%;
-    margin-bottom: 2rem;
-
-    h2 {
-      color: $color-titulos;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      text-align: center;
-    }
-
-    .form-label {
-      color: $color-titulos;
-      font-weight: 500;
-    }
-
-    .form-control {
-      border: 1px solid $color-intervalo;
-      border-radius: 6px;
-
-      &:focus {
-        border-color: $color-primario;
-        box-shadow: 0 0 0 0.2rem rgba($color-primario, 0.25);
-      }
-    }
-
-    .btn-primary {
-      background-color: $color-primario;
-      border: none;
-      font-weight: 600;
-
-      &:hover {
-        background-color: darken($color-primario, 10%);
-      }
-    }
-
-    .btn-outline-primary {
-      color: $color-primario;
-      border: 1px solid $color-primario;
-      font-weight: 600;
-      background-color: transparent;
-
-      &:hover {
-        background-color: $color-primario;
-        color: white;
-      }
-    }
-
-    .btn+.btn {
-      margin-top: 0.5rem;
-    }
-
-    a {
-      color: $color-info;
-      font-size: 0.9rem;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
+  min-height: 100vh;              // garante que a página ocupe toda a altura da tela
+  display: flex;
+  flex-direction: column;          // organiza header, main e footer verticalmente
 }
 
-
-// Página de cadastro
-.cadastro-page {
-  padding-top: 1px;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: $color-fundo;
-  font-family: $font-family-base;
-
-  main {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 100px;
-    padding-bottom: 40px; // 👈 espaçamento extra abaixo do card
-  }
-
-
-
-
-  .card {
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba($color-titulos, 0.1);
-    padding: 2rem;
-    max-width: 500px;
-    width: 100%;
-    margin-bottom: 2rem;
-
-    h2 {
-      color: $color-titulos;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      text-align: center;
-    }
-
-    .form-label {
-      color: $color-titulos;
-      font-weight: 500;
-    }
-
-    .form-control {
-      border: 1px solid $color-intervalo;
-      border-radius: 6px;
-
-      &:focus {
-        border-color: $color-primario;
-        box-shadow: 0 0 0 0.2rem rgba($color-primario, 0.25);
-      }
-    }
-
-    .btn-primary {
-      background-color: $color-primario;
-      border: none;
-      font-weight: 600;
-
-      &:hover {
-        background-color: darken($color-primario, 10%);
-      }
-    }
-
-    a {
-      color: $color-info;
-      font-size: 0.9rem;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
+/* ===== Área principal da página de resultados =====
+   Espaçamento interno superior e inferior para separar do header e footer */
+.resultados-page main {
+  flex-grow: 1;                    // ocupa todo o espaço disponível entre header e footer
+  padding-top: 100px;
+  padding-bottom: 40px;
 }
 
+/* ===== Barra de risco (visualização de risco genético) =====
+   Estrutura da barra com fundo, altura, bordas arredondadas e overflow oculto */
+.resultados-page .risk-bar {
+  width: 100%;
+  height: 24px;
+  background-color: #e9ecef;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1rem;
 
-// Página de contato
-
-.contato-page {
-  background-color: $color-fundo;
-  font-family: $font-family-base;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-
-  main {
-    flex-grow: 1;
-    padding-top: 100px;
-    padding-bottom: 40px;
-
-    h1 {
-      color: $color-titulos;
-      font-weight: 700;
-      font-size: 2rem;
-    }
-
-    p.lead {
-      color: $color-secundario;
-      font-size: 1.1rem;
-    }
-
-    .list-group-item {
-      background-color: transparent;
-      border: none;
-      font-size: 1.1rem;
-      color: $color-titulos;
-      padding: 1rem 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      span {
-        font-weight: 500;
-      }
-    }
-  }
-
-  // Botões personalizados
-  .btn-outline-primary {
-    color: $color-primario;
-    border-color: $color-primario;
+  /* ===== Preenchimento da barra de risco =====
+     Cores diferentes conforme nível (baixo, moderado, alto) */
+  .risk-fill {
+    height: 100%;
+    text-align: center;
     font-weight: 600;
+    color: white;
+    line-height: 24px;
 
-    &:hover {
-      background-color: $color-primario;
-      color: white;
-      border-color: $color-primario;
+    &.baixo {                     // risco baixo: verde, 33%
+      width: 33%;
+      background-color: #28a745;
     }
 
-    &:focus {
-    box-shadow: 0 0 0 0.25rem rgba($color-primario, 0.4);
-    }
-  }
-
-
-}
-
-
-
-.sobre-page {
-  background-color: $color-fundo;
-  font-family: $font-family-base;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-
-  main {
-    flex-grow: 1;
-    padding-top: 100px;
-    padding-bottom: 40px;
-
-    h1 {
-      color: $color-titulos;
-      font-weight: 700;
-      font-size: 2rem;
-      text-align: center;
+    &.moderado {                  // risco moderado: amarelo, 66%
+      width: 66%;
+      background-color: #ffc107;
     }
 
-    p {
-      color: $color-titulos;
-      font-size: 1.05rem;
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
-      text-align: justify;
-
-      &.lead {
-        color: $color-secundario;
-        font-size: 1.2rem;
-      }
-
-      em {
-        color: $color-onboarding;
-        font-style: italic;
-      }
-
-      strong {
-        color: $color-primario;
-        font-weight: 700;
-      }
-
-      a {
-        color: $color-info;
-        text-decoration: underline;
-
-        &:hover {
-          color: darken($color-info, 10%);
-        }
-      }
-    }
-
-    ul {
-      padding-left: 1rem;
-      margin-top: 1rem;
-
-      li {
-        color: $color-titulos;
-        font-size: 1rem;
-        margin-bottom: 0.5rem;
-        text-align: justify;
-
-
-        a {
-          color: $color-info;
-          font-weight: 500;
-
-          &:hover {
-            text-decoration: underline;
-            color: darken($color-info, 10%);
-          }
-        }
-      }
+    &.alto {                       // risco alto: vermelho, 100%
+      width: 100%;
+      background-color: #dc3545;
     }
   }
-
-
 }
 
+// ==========================
+// Banner de cookies
+// ==========================
+/* ===== Banner de cookies fixo =====
+   Aparece sempre na parte inferior da tela, sobrepondo o conteúdo */
 .cookie-banner {
-  position: fixed;
-  bottom: 0;
+  position: fixed;                // fixa o banner na tela
+  bottom: 0;                      // alinhado à parte inferior
   left: 0;
   right: 0;
-  background-color: $color-secundario;
-  color: white;
-  padding: 1rem;
-  text-align: center;
-  font-size: 0.9rem;
-  z-index: 1050; 
+  background-color: $color-secundario;  // cor de fundo do banner
+  color: white;                   // cor do texto
+  padding: 1rem;                  // espaçamento interno
+  text-align: center;             // centraliza conteúdo
+  font-size: 0.9rem;              // tamanho da fonte
+  z-index: 1050;                  // garante que fique acima de outros elementos
 
+  /* ===== Links dentro do banner =====
+     Normal: cor info e sublinhado
+     Hover: clareia a cor */
   a {
     color: $color-info;
     text-decoration: underline;
@@ -817,6 +567,8 @@ body {
     }
   }
 
+  /* ===== Botão de ação do banner =====
+     Botão personalizado com cor de fundo e efeito hover */
   .btn {
     background-color: $color-primario;
     border: none;
@@ -826,82 +578,4 @@ body {
       background-color: darken($color-primario, 10%);
     }
   }
-}
-
-
-
-
-.resultados-page {
-  background-color: $color-fundo;
-  font-family: $font-family-base;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-
-  main {
-    flex-grow: 1;
-    padding-top: 100px;
-    padding-bottom: 40px;
-
-    h1 {
-      color: $color-titulos;
-      font-weight: 700;
-      font-size: 2rem;
-    }
-
-    .card {
-      border-radius: 12px;
-      background-color: white;
-      padding: 1.5rem;
-
-      .card-title {
-        color: $color-primario;
-        font-weight: 700;
-        font-size: 1.25rem;
-      }
-
-      .card-text {
-        color: $color-titulos;
-        font-size: 1rem;
-        margin-bottom: 1rem;
-      }
-
-      p {
-        font-size: 0.95rem;
-        color: $color-secundario;
-      }
-    }
-  }
-
-  .risk-bar {
-  width: 100%;
-  height: 24px;
-  background-color: #e9ecef;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 1rem;
-
-  .risk-fill {
-    height: 100%;
-    text-align: center;
-    font-weight: 600;
-    color: white;
-    line-height: 24px;
-
-    &.baixo {
-      width: 33%;
-      background-color: #28a745; // verde
-    }
-
-    &.moderado {
-      width: 66%;
-      background-color: #ffc107; // amarelo
-    }
-
-    &.alto {
-      width: 100%;
-      background-color: #dc3545; // vermelho
-    }
-  }
-}
 }

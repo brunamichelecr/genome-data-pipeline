@@ -1,15 +1,26 @@
 {
-  "name": "frontend",
+  "name": "demomind",
   "version": "1.0.0",
-  "description": "",
+  "description": "Pipeline completo de engenharia de dados aplicado à genômica. Integra APIs biomédicas (NCBI, ClinVar, dbSNP), realiza ETL com PostgreSQL e exibe resultados genéticos via dashboard web. Foco em saúde personalizada, análise de SNPs e portfólio técnico para recrutadores.",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "sass": "sass --watch scss/custom.scss:css/style.css --load-path=node_modules",
-    "type": "module"
+    "sass": "sass --watch scss/custom.scss:css/style.css --load-path=node_modules"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "engenharia-de-dados",
+    "genômica",
+    "pipeline",
+    "ETL",
+    "PostgreSQL",
+    "saúde-personalizada",
+    "SNP",
+    "dashboard-web",
+    "biomedicina",
+    "portfólio"
+  ],
+  "author": "Bruna Michele",
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^5.3.8"
