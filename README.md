@@ -173,3 +173,23 @@ erDiagram
 
 Este repositório será atualizado à medida que cada tarefa for concluída.
 Objetivo final: um projeto completo de **engenharia de dados aplicada à saúde**.
+
+
+---
+
+
+## Obstáculos Técnicos e Desafios Enfrentados
+
+Durante o desenvolvimento do projeto **Genome Data Pipeline**, diversos desafios técnicos surgiram, exigindo adaptações criativas e decisões estratégicas. Abaixo estão os principais obstáculos enfrentados:
+
+- **Limitações de APIs externas**  
+  As APIs do NCBI (e-utilities) possuem restrições de taxa e estrutura de resposta complexa. Foi necessário implementar controle de tempo entre requisições e tratamento robusto de erros para garantir a estabilidade do pipeline.
+
+- **Tradução de dados biomédicos**  
+  A tradução automática das descrições de doenças (em inglês) para o português apresentou dificuldades. Bibliotecas como `googletrans` deixaram de funcionar em versões recentes do Python (como 3.13), e APIs como DeepL e Google Cloud Translate exigem planos pagos. A solução adotada foi realizar a tradução manual dos textos mais relevantes.
+
+- **Limitações de bibliotecas em Python 3.13**  
+  Algumas bibliotecas amplamente utilizadas, como `googletrans`, ainda não são compatíveis com Python 3.13 devido à remoção de módulos como `cgi`. Isso exigiu reavaliação de dependências e busca por alternativas compatíveis.
+
+- **Documentação e visualização**  
+  Traduzir a complexidade técnica do pipeline para uma documentação clara e acessível foi um desafio à parte. O objetivo foi tornar o projeto compreensível tanto para profissionais técnicos quanto para recrutadores e colegas de área.
