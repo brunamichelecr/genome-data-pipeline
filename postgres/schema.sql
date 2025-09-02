@@ -12,10 +12,12 @@ CREATE TABLE usuarios (
 CREATE TABLE diseases (
   id_disease SERIAL PRIMARY KEY,        -- Identificador único da doença
   disease_name VARCHAR(100),            -- Nome da doença
-  disease_desc TEXT                      -- Descrição detalhada
+  disease_desc TEXT,                      -- Descrição detalhada
   disease_name_pt VARCHAR(100),  -- Nome da doença em português
   disease_synonym TEXT,                  -- Sinônimos em inglês (uso interno)
-  mesh_id VARCHAR(15);                    -- Identificador da doença no MeSH
+  mesh_id VARCHAR(15),                    -- Identificador da doença no MeSH
+  disease_desc_pt TEXT,                   --Descrição detalhada em português
+  breve_desc TEXT;                        -- Breve descrição em português
 );
 
 -- Tabela de genes associados às doenças
