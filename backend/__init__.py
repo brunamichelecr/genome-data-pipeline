@@ -1,1 +1,0 @@
-#iniciador de pacote
