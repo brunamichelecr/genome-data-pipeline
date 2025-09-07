@@ -1,74 +1,121 @@
 <!doctype html>
 <html lang="pt-br">
-<!-- Página de resultados genéticos -->
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Resultados - DemoMind</title>
-    <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}" type="image/x-icon">
-    <!-- Estilos e fontes -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resultados - DemoMind</title>
+  <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}" type="image/x-icon">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
+<body class="resultados-page d-flex flex-column min-vh-100 {{ page_class }}">
+  <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='img/logo.svg') }}" alt="DemoMind" height="40" /></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('cadastro') }}">Carregar dados</a></li>
+          <li class="nav-item"><a class="nav-link active" href="{{ url_for('resultados') }}">Resultados</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('sobre') }}">Sobre nós</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('contato') }}">Contato</a></li>
+          <a href="#" class="btn btn-outline-light ms-lg-3">Entrar</a>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-<body class="resultados-page d-flex flex-column min-vh-100">
-    <!-- Navbar fixa -->
-    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='img/logo.svg') }}" alt="DemoMind" height="40" /></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+  <main class="container resultados-main mt-5 pt-4">
+    <div class="text-center mb-5">
+      <h1 class="mb-3">Resultados da Análise Genética</h1>
+      <p class="lead">Achados relacionados ao seu perfil genético.</p>
+    </div>
+    <div class="row">
+      {% for d in doencas %}
+        <div class="col-md-6 mb-4">
+          <div class="card-doenca h-100" style="animation-delay: {{ d.delay }}s;">
+            <h4 class="card-title fw-bold">{{ d.name }}</h4>
+            <p class="card-text text-muted">{{ d.brief }}</p>
+
+            <button
+              class="btn-card"
+              data-bs-toggle="modal"
+              data-bs-target="#modal-{{ d.id }}"
+            >
+              Leia mais
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <!-- Menu principal -->
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('cadastro') }}">Carregar dados</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="{{ url_for('resultados') }}">Resultados</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('sobre') }}">Sobre nós</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('contato') }}">Contato</a></li>
-                    <a href="#" class="btn btn-outline-light ms-lg-3">Entrar</a>
-                </ul>
+
+            <div class="progress mt-3">
+              <div
+                class="progress-bar {{ d.bg_class }}"
+                role="progressbar"
+                style="width: {{ d.percent }}%;"
+                aria-valuenow="{{ d.percent }}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                {{ d.percent }}%
+              </div>
             </div>
-        </div>
-    </nav>
-
-    <!-- Conteúdo principal -->
-    <main class="flex-grow-1 container" style="padding-top: 100px; padding-bottom: 40px;">
-        <div class="text-center mb-5">
-            <h1 class="mb-3">Resultados da Análise Genética</h1>
-            <p class="lead">Achados relacionados ao seu perfil genético.</p>
+          </div>
         </div>
 
-        <div class="row">
-            {{ cards_html|safe }}
-        </div>
-    </main>
-
-    <!-- Rodapé simples -->
-    <footer class="site-footer py-5">
-        <div class="container">
-            <div class="text-center small text-muted">
-                © 2025 DemoMind. Todos os direitos reservados.
+        <!-- Modal individual -->
+        <div
+          class="modal fade"
+          id="modal-{{ d.id }}"
+          tabindex="-1"
+          aria-labelledby="modal-{{ d.id }}-label"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modal-{{ d.id }}-label">
+                  {{ d.name }}
+                </h5>
+              </div>
+              <div class="modal-body">
+                <p class="text-muted">{{ d.desc }}</p>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-sm"
+                  data-bs-dismiss="modal"
+                >
+                  Fechar
+                </button>
+              </div>
             </div>
+          </div>
         </div>
-    </footer>
+      {% endfor %}
+    </div>
+  </main>
 
-        <!-- Script para esconder banner de cookies -->
-    <script>
-        document.querySelector('.cookie-banner .btn').addEventListener('click', function () {
-            document.querySelector('.cookie-banner').style.display = 'none';
-        });
-    </script>
-    
-    <!-- Scripts Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+  <footer class="site-footer py-5 mt-auto">
+    <div class="container">
+      <div class="text-center small text-muted">
+        © 2025 DemoMind. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('.cookie-banner .btn').addEventListener('click', function () {
+      document.querySelector('.cookie-banner').style.display = 'none';
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+          crossorigin="anonymous">
+  </script>
 </body>
-
 </html>

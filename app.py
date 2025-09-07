@@ -34,52 +34,37 @@ def sobre_page():
 def contato_page():
     return render_template('contato.html')
 
-# Rota de resultados
+# Rota da página de resultados
 @app.route('/resultados', methods=['GET'], endpoint='resultados')
 def resultados():
-    doencas = orm_db.session.query(Disease).all()
+    doencas_db = orm_db.session.query(Disease).all()
+    doencas = []
 
-    cards_html = ""
-    for d in doencas:
-        modal_id = f"modal-{d.id_disease}"
-        cards_html += f"""
-        <div class="col-md-6 mb-4">
-            <div class="card shadow-sm h-100">
-                <div class="card-body">
-                    <h4 class="card-title text-primary fw-bold">{d.disease_name_pt}</h4>
-                    <p class="card-text">{d.breve_desc or '—'}</p>
-                    <button class="btn btn-outline-info btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#{modal_id}">
-                        Leia mais
-                    </button>
-                    <div class="progress" style="height: 20px;">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                            Risco: 0%
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    for idx, d in enumerate(doencas_db, start=1):
+        score = getattr(d, 'risk_score', 0.33)
+        percent = int(score * 100)
+        if score < 0.4:
+            bg_class = 'bg-success'
+        elif score < 0.7:
+            bg_class = 'bg-warning'
+        else:
+            bg_class = 'bg-danger'
 
-        <!-- Modal -->
-        <div class="modal fade" id="{modal_id}" tabindex="-1" aria-labelledby="{modal_id}-label" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="{modal_id}-label">{d.disease_name_pt}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>{d.disease_desc_pt or 'Descrição não disponível.'}</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        """
+        doencas.append({
+            'id': d.id_disease,
+            'name': d.disease_name_pt,
+            'brief': d.breve_desc or '—',
+            'desc': d.disease_desc_pt or 'Descrição não disponível.',
+            'percent': percent,
+            'bg_class': bg_class,
+            'delay': round(0.2 * idx, 1)
+        })
 
-    return render_template('resultados.html', cards_html=cards_html)
+    return render_template(
+        'resultados.html',
+        doencas=doencas,
+        page_class='resultados-page'
+    )
 
 # Rota de cadastro via API
 @app.route('/api/cadastro', methods=['POST'])
@@ -131,7 +116,6 @@ def verificar_email():
         cur.close()
         conn.close()
 
-# Inicialização
 if __name__ == '__main__':
     print("Servidor Flask iniciado em http://localhost:5000")
     app.run(debug=True, port=5000)
