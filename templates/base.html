@@ -23,36 +23,65 @@
 <body class="{% block body_class %}{% endblock %} min-vh-100 d-flex flex-column">
 
   <!-- Navbar -->
-<!-- Navbar completa dentro do base.html -->
-<nav class="navbar navbar-expand-lg navbar-custom fixed-top">
-  <div class="container">
-    <a class="navbar-brand" href="{{ url_for('home') }}">
-      <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="DemoMind" height="40" />
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('carregar_dados') }}">Carregar dados</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('resultados') }}">Resultados</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('sobre') }}">Sobre nós</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('contato') }}">Contato</a></li>
+  <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+    <div class="container">
 
-        {% if session.get('user_id') %}
-          <li class="nav-item">
-            <a href="{{ url_for('logout') }}" class="btn btn-outline-light ms-lg-3">Sair</a>
-          </li>
-        {% else %}
-          <li class="nav-item">
-            <a href="{{ url_for('login') }}" class="btn btn-outline-light ms-lg-3">Entrar</a>
-          </li>
-        {% endif %}
-      </ul>
+      <!-- Logo apenas como imagem -->
+      <div class="navbar-brand">
+        <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="DemoMind" height="40">
+      </div>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+          {% if not session.get('user_id') %}
+            <!-- Não logado -->
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('cadastro') }}">Criar conta</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('sobre') }}">Sobre nós</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('contato') }}">Contato</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-outline-light ms-lg-3" href="{{ url_for('login') }}">Entrar</a>
+            </li>
+
+          {% else %}
+            <!-- Logado -->
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('resultados') }}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('carregar_dados') }}">Carregar dados</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('resultados') }}">Resultados</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('sobre') }}">Sobre nós</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('contato') }}">Contato</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-outline-light ms-lg-3" href="{{ url_for('logout') }}">Sair</a>
+            </li>
+          {% endif %}
+
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
   <!-- Conteúdo principal -->
   <main class="flex-grow-1">
