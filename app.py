@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from models.usuario import cadastrar_usuario
@@ -14,48 +14,30 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 orm_db = SQLAlchemy(app)
 
-# Rota de cadastro
-@app.route('/api/cadastro', methods=['POST'])
-def cadastro():
-    data = request.get_json()
-    nome = data.get('nome')
-    genero = data.get('genero')
-    email = data.get('email')
-    senha = data.get('senha')
+# Rota da página inicial
+@app.route('/', endpoint='home')
+def index():
+    return render_template('index.html')
 
-    if not all([nome, genero, email, senha]):
-        return jsonify({"erro": "Todos os campos são obrigatórios."}), 400
+# Rota da página de cadastro (visual)
+@app.route('/cadastro', endpoint='cadastro')
+def cadastro_page():
+    return render_template('cadastro.html')
 
-    conn = get_connection()
-    cur = conn.cursor()
-    try:
-        cur.execute("SELECT 1 FROM usuarios WHERE email = %s", (email,))
-        if cur.fetchone():
-            return jsonify({"erro": "E-mail já cadastrado."}), 409
-    except Exception as e:
-        print("Erro ao verificar e-mail:", e)
-        return jsonify({"erro": "Erro ao verificar e-mail."}), 500
-    finally:
-        cur.close()
-        conn.close()
+# Rota da página "Sobre nós"
+@app.route('/sobre', endpoint='sobre')
+def sobre_page():
+    return render_template('sobre.html')
 
-    sucesso, mensagem = cadastrar_usuario(nome, genero, email, senha)
-    status = 201 if sucesso else 400
-    return jsonify({"mensagem": mensagem}), status
+# Rota da página "Contato"
+@app.route('/contato', endpoint='contato')
+def contato_page():
+    return render_template('contato.html')
 
 # Rota de resultados
-@app.route('/resultados', methods=['GET'])
+@app.route('/resultados', methods=['GET'], endpoint='resultados')
 def resultados():
     doencas = orm_db.session.query(Disease).all()
-
-    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    html_path = os.path.join(base_dir, 'docs', 'resultados.html')
-
-    try:
-        with open(html_path, "r", encoding="utf-8") as f:
-            html = f.read()
-    except FileNotFoundError:
-        return "Arquivo resultados.html não encontrado na pasta docs.", 404
 
     cards_html = ""
     for d in doencas:
@@ -97,10 +79,38 @@ def resultados():
         </div>
         """
 
-    html = html.replace("<!-- DOENCAS_DINAMICAS -->", cards_html)
-    return html
+    return render_template('resultados.html', cards_html=cards_html)
 
-# Rota de verificação de e-mail
+# Rota de cadastro via API
+@app.route('/api/cadastro', methods=['POST'])
+def cadastro_api():
+    data = request.get_json()
+    nome = data.get('nome')
+    genero = data.get('genero')
+    email = data.get('email')
+    senha = data.get('senha')
+
+    if not all([nome, genero, email, senha]):
+        return jsonify({"erro": "Todos os campos são obrigatórios."}), 400
+
+    conn = get_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute("SELECT 1 FROM usuarios WHERE email = %s", (email,))
+        if cur.fetchone():
+            return jsonify({"erro": "E-mail já cadastrado."}), 409
+    except Exception as e:
+        print("Erro ao verificar e-mail:", e)
+        return jsonify({"erro": "Erro ao verificar e-mail."}), 500
+    finally:
+        cur.close()
+        conn.close()
+
+    sucesso, mensagem = cadastrar_usuario(nome, genero, email, senha)
+    status = 201 if sucesso else 400
+    return jsonify({"mensagem": mensagem}), status
+
+# Rota de verificação de e-mail via API
 @app.route('/api/verificar-email', methods=['GET'])
 def verificar_email():
     email = request.args.get('email')

@@ -7,6 +7,8 @@
   E-mail: brunamichelecr@gmail.com
   Local: Osasco, São Paulo, Brasil
 -->
+<!doctype html>
+<html lang="pt-br">
 
 <!doctype html>
 <html lang="pt-br">
@@ -15,11 +17,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DemoMind</title>
-    <link rel="icon" href="img/favicon.png" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}" type="image/x-icon">
 
     <!-- CSS do projeto -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
 
     <!-- Fonte Google -->
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
@@ -27,98 +29,69 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-</head>
 
-<body class="cadastro-page">
 
-    <!-- Navbar fixa -->
+    </head>
+
+<body class="login-page d-flex flex-column min-vh-100"> 
+
+    <!-- Navbar fixa no topo -->
     <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <img src="img/logo.svg" alt="DemoMind" height="40" />
-            </a>
+            <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='img/logo.svg') }}" alt="DemoMind" height="40" /></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <!-- Links de navegação -->
+                <!-- Menu principal -->
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="cadastro.html">Carregar dados</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html">Resultados</a></li>
-                    <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre nós</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contato.html">Contato</a></li>
-                    <a href="login.html" class="btn btn-outline-light ms-lg-3">Entrar</a>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('cadastro') }}">Carregar dados</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('resultados') }}">Resultados</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('sobre') }}">Sobre nós</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('contato') }}">Contato</a></li>
+                    <a href="#" class="btn btn-outline-light ms-lg-3">Entrar</a>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Conteúdo principal da página -->
-    <div class="container pt-5 mt-5 d-flex justify-content-center align-items-center">
-        <div class="card p-4 shadow-sm" style="max-width: 500px; width: 100%;">
-            <h2 class="text-center mb-4">Criar Conta</h2>
+    <!-- Conteúdo principal -->
+    <main class="flex-grow-1 d-flex justify-content-center align-items-start"
+        style="padding-top: 100px; padding-bottom: 40px;">
+        <!-- Card centralizado com sombra e padding -->
+        <div class="card p-4 shadow-sm" style="max-width: 400px; width: 100%;">
+            <h2 class="text-center mb-4">Entrar</h2> 
 
-            <!-- Feedback de validação -->
-            <div id="mensagem-feedback" class="alert d-none" role="alert"></div>
-
-            <!-- Formulário de cadastro -->
-            <form id="cadastro-form" novalidate>
-                <!-- Nome -->
-                <div class="mb-3">
-                    <label for="nome" class="form-label">Nome completo</label>
-                    <input type="text" class="form-control" id="nome" placeholder="Seu nome" required
-                        aria-label="Nome completo">
-                </div>
-
-                <!-- Gênero -->
-                <div class="mb-3">
-                    <label for="genero" class="form-label">Gênero</label>
-                    <select class="form-select" id="genero" required aria-label="Selecione seu gênero">
-                        <option value="" selected disabled>Selecione seu gênero</option>
-                        <option value="F">Feminino</option>
-                        <option value="M">Masculino</option>
-                        <option value="O">Outro</option>
-                        <option value="N">Prefiro não informar</option>
-                    </select>
-                </div>
-
-                <!-- E-mail -->
+            <!-- Formulário de login -->
+            <form>
+                <!-- Campo e-mail -->
                 <div class="mb-3">
                     <label for="email" class="form-label">E-mail</label>
-                    <input type="email" class="form-control" id="email" placeholder="seu@email.com" required>
+                    <input type="email" class="form-control" id="email" placeholder="seu@email.com">
                 </div>
 
-                <!-- Senha -->
+                <!-- Campo senha -->
                 <div class="mb-3">
                     <label for="senha" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="senha" placeholder="********" required minlength="8">
-                </div>
-
-                <!-- Confirmar senha -->
-                <div class="mb-3">
-                    <label for="confirmar-senha" class="form-label">Confirmar senha</label>
-                    <input type="password" class="form-control" id="confirmar-senha" placeholder="********" required minlength="8">
-                </div>
-
-                <!-- Termos de uso -->
-                <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" id="termos" required>
-                    <label class="form-check-label" for="termos">
-                        Concordo com os <a href="#">termos de uso</a> e <a href="#">política de privacidade</a>.
-                    </label>
+                    <input type="password" class="form-control" id="senha" placeholder="********">
                 </div>
 
                 <!-- Botão de envio -->
-                <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
 
-                <!-- Link para login -->
+                <!-- Link de recuperação de senha -->
                 <div class="text-center mt-3">
-                    <a href="login.html">Já tem uma conta? Faça login</a>
+                    <a href="#">Esqueceu a senha?</a>
+                </div>
+
+                <!-- Botão de criar conta -->
+                <div class="text-center mt-2">
+                    <a href="cadastro.html" class="btn btn-outline-primary w-100">Criar conta</a>
                 </div>
             </form>
         </div>
-    </div>
+    </main>
 
     <!-- Banner de cookies -->
     <div class="cookie-banner">
@@ -126,7 +99,7 @@
         <button class="btn btn-sm btn-primary ms-2">Aceitar</button>
     </div>
 
-    <!-- Footer -->
+    <!-- Rodapé -->
     <footer class="site-footer py-5">
         <div class="container">
             <div class="row text-center text-md-start">
@@ -164,16 +137,24 @@
 
             <hr class="my-4">
 
+            <!-- Direitos reservados -->
             <div class="text-center small text-muted">
                 © 2025 DemoMind. Todos os direitos reservados.
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="js/cadastro.js"></script>
+    <!-- Script para banner de cookies -->
+    <script>
+        document.querySelector('.cookie-banner .btn').addEventListener('click', function () {
+            document.querySelector('.cookie-banner').style.display = 'none';
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 </body>
+
 </html>

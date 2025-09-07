@@ -7,87 +7,78 @@
   E-mail: brunamichelecr@gmail.com
   Local: Osasco, São Paulo, Brasil
 -->
+  <!doctype html>
+<html lang="pt-br">
+
 <!doctype html>
 <html lang="pt-br">
 
 <head>
-    <!-- Meta e título -->
-    <meta charset="utf-8"> 
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DemoMind</title>
-    <link rel="icon" href="img/favicon.png" type="image/x-icon"> 
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}" type="image/x-icon">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css"> <!-- Estilo principal -->
-    <link rel="stylesheet" href="css/custom.css"> <!-- Estilos personalizados -->
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet"> 
+    <!-- CSS do projeto -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+
+    <!-- Fonte Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"> 
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 
-<body class="login-page d-flex flex-column min-vh-100"> 
+<body class="contato-page d-flex flex-column min-vh-100">
 
-    <!-- Navbar fixa no topo -->
+    <!-- Navbar fixa -->
     <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
         <div class="container">
-            <!-- Logo da marca -->
-            <a class="navbar-brand" href="index.html">
-                <img src="img/logo.svg" alt="DemoMind" height="40" />
-            </a>
-
-            <!-- Botão hamburger para mobile -->
+            <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='img/logo.svg') }}" alt="DemoMind" height="40" /></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <!-- Menu colapsável -->
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> 
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="cadastro.html">Carregar dados</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html">Resultados</a></li>
-                    <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre nós</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contato.html">Contato</a></li>
-                    <a href="login.html" class="btn btn-outline-light ms-lg-3">Entrar</a>
+                <!-- Menu principal -->
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('cadastro') }}">Carregar dados</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('resultados') }}">Resultados</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('sobre') }}">Sobre nós</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{ url_for('contato') }}">Contato</a></li>
+                    <a href="#" class="btn btn-outline-light ms-lg-3">Entrar</a>
                 </ul>
             </div>
         </div>
     </nav>
 
     <!-- Conteúdo principal -->
-    <main class="flex-grow-1 d-flex justify-content-center align-items-start"
-        style="padding-top: 100px; padding-bottom: 40px;">
-        <!-- Card centralizado com sombra e padding -->
-        <div class="card p-4 shadow-sm" style="max-width: 400px; width: 100%;">
-            <h2 class="text-center mb-4">Entrar</h2> 
+    <main class="flex-grow-1 container" style="padding-top: 100px; padding-bottom: 40px;">
+        <div class="text-center mb-5">
+            <h1 class="mb-3">Entre em contato</h1>
+            <p class="lead">Fique à vontade para me encontrar nas redes ou enviar um e-mail direto:</p>
+        </div>
 
-            <!-- Formulário de login -->
-            <form>
-                <!-- Campo e-mail -->
-                <div class="mb-3">
-                    <label for="email" class="form-label">E-mail</label>
-                    <input type="email" class="form-control" id="email" placeholder="seu@email.com">
-                </div>
-
-                <!-- Campo senha -->
-                <div class="mb-3">
-                    <label for="senha" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="senha" placeholder="********">
-                </div>
-
-                <!-- Botão de envio -->
-                <button type="submit" class="btn btn-primary w-100">Login</button>
-
-                <!-- Link de recuperação de senha -->
-                <div class="text-center mt-3">
-                    <a href="#">Esqueceu a senha?</a>
-                </div>
-
-                <!-- Botão de criar conta -->
-                <div class="text-center mt-2">
-                    <a href="cadastro.html" class="btn btn-outline-primary w-100">Criar conta</a>
-                </div>
-            </form>
+        <!-- Lista de contatos -->
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>LinkedIn</span>
+                        <a href="https://www.linkedin.com/in/brunamcr" target="_blank" class="btn btn-outline-primary">Visitar</a>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>GitHub</span>
+                        <a href="https://github.com/brunamichelecr" target="_blank" class="btn btn-outline-primary">Ver projetos</a>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>E-mail</span>
+                        <a href="mailto:brunamichelecr@gmail.com" class="btn btn-outline-primary">Enviar mensagem</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </main>
 
@@ -135,14 +126,13 @@
 
             <hr class="my-4">
 
-            <!-- Direitos reservados -->
             <div class="text-center small text-muted">
                 © 2025 DemoMind. Todos os direitos reservados.
             </div>
         </div>
     </footer>
 
-    <!-- Script para banner de cookies -->
+    <!-- Script para esconder banner de cookies -->
     <script>
         document.querySelector('.cookie-banner .btn').addEventListener('click', function () {
             document.querySelector('.cookie-banner').style.display = 'none';
@@ -153,6 +143,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-</body>
 
+</body>
 </html>
