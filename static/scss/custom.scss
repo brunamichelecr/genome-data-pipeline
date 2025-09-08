@@ -39,7 +39,7 @@ body {
   font-family: 'Segoe UI', sans-serif;
   background-color: $color-fundo;
   color: $color-titulos;
-  padding-top: 58px;
+
 }
 
 /* ===== Cards =====
@@ -352,11 +352,11 @@ body {
     /* ===== Botão principal do formulário =====
        Cor de fundo customizada e hover com escurecimento */
     .btn-primary {
-      background-color: $color-onboarding;
+      background-color: $color-onboarding !important;
       border: none;
 
       &:hover {
-        background-color: darken($color-onboarding, 10%);
+        background-color: darken($color-onboarding, 10%) !important;
       }
     }
   }
@@ -498,7 +498,6 @@ body {
    Espaçamento interno superior e inferior para separar do header e footer */
 .resultados-page main {
   flex-grow: 1;                    // ocupa todo o espaço disponível entre header e footer
-  padding-top: 100px;
   padding-bottom: 40px;
 }
 
@@ -548,7 +547,7 @@ body {
   bottom: 0;                      // alinhado à parte inferior
   left: 0;
   right: 0;
-  background-color: $color-secundario;  // cor de fundo do banner
+  background-color: $color-secundario !important;  // cor de fundo do banner
   color: white;                   // cor do texto
   padding: 1rem;                  // espaçamento interno
   text-align: center;             // centraliza conteúdo

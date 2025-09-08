@@ -43,13 +43,13 @@ def allowed_file(filename):
 orm_db = SQLAlchemy(app)
 
 # ——————————————————————————————
-# Rota raiz
+# Rota raiz (landing page)
 # ——————————————————————————————
 @app.route('/', methods=['GET'])
 def home():
     if session.get('user_id'):
         return redirect(url_for('resultados'))
-    return redirect(url_for('login'))
+    return render_template('index.html')
 
 # ——————————————————————————————
 # Cadastro de usuário
@@ -117,7 +117,8 @@ def login():
 @app.route('/logout', methods=['GET'])
 def logout():
     session.pop('user_id', None)
-    return redirect(url_for('login'))
+    # volta à landing page não-logada
+    return redirect(url_for('home'))
 
 # ——————————————————————————————
 # Upload de dados (CSV)
@@ -173,7 +174,7 @@ def resultados():
 
     doencas = []
     for idx, d in enumerate(orm_db.session.query(Disease).all(), start=1):
-        score   = getattr(d, 'risk_score', 0.75)
+        score = getattr(d, 'risk_score', 0.75)
         percent = int(score * 100)
         if score < 0.4:
             bg_class = 'bg-success'

@@ -11874,7 +11874,6 @@ body {
   font-family: "Segoe UI", sans-serif;
   background-color: #f2f4f3;
   color: #1c2a3a;
-  padding-top: 58px;
 }
 
 /* ===== Cards =====
@@ -12149,11 +12148,11 @@ body {
   border-color: #3e8e7e;
 }
 .upload-section .upload-form .btn-primary {
-  background-color: #5e3a87;
+  background-color: #5e3a87 !important;
   border: none;
 }
 .upload-section .upload-form .btn-primary:hover {
-  background-color: rgb(69.1606217617, 42.6735751295, 99.3264248705);
+  background-color: rgb(69.1606217617, 42.6735751295, 99.3264248705) !important;
 }
 
 /* Define o fundo e as cores gerais da seção */
@@ -12266,7 +12265,6 @@ body {
    Espaçamento interno superior e inferior para separar do header e footer */
 .resultados-page main {
   flex-grow: 1;
-  padding-top: 100px;
   padding-bottom: 40px;
 }
 
@@ -12309,7 +12307,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #7A8A91;
+  background-color: #7A8A91 !important;
   color: white;
   padding: 1rem;
   text-align: center;
