@@ -12,8 +12,11 @@ from models.usuario import cadastrar_usuario
 from models.disease import Disease
 from db import get_connection
 
-app = Flask(__name__)
-CORS(app)
+application = Flask(__name__)
+CORS(application)
+
+
+
 
 # ——————————————————————————————
 # Configurações gerais
