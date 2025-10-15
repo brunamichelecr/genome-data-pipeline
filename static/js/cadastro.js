@@ -14,7 +14,7 @@ document.getElementById('cadastro-form').addEventListener('submit', async functi
   const senhaValida = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
   // ----------------------------
-  // Validações básicas
+  // Validações básicas (Frontend)
   // ----------------------------
   if (!nome || !genero || !email || !senha || !confirmar) {
     mostrarMensagem('Todos os campos são obrigatórios.');
@@ -40,7 +40,15 @@ document.getElementById('cadastro-form').addEventListener('submit', async functi
   // Verificação de e-mail duplicado no backend
   // ----------------------------
   try {
-    const verificar = await fetch(`http://localhost:5000/api/verificar-email?email=${encodeURIComponent(email)}`);
+    // CORRETO: Caminho relativo
+    const verificar = await fetch(`/api/verificar-email?email=${encodeURIComponent(email)}`);
+    
+    // MELHORIA: Garante que o servidor retornou 200/201 antes de ler o JSON
+    if (!verificar.ok) {
+        // Se o servidor deu 4xx ou 5xx, trata como erro de API
+        throw new Error(`Erro do servidor na verificação: ${verificar.status}`);
+    }
+
     const resultadoVerificacao = await verificar.json();
 
     if (resultadoVerificacao.existe) {
@@ -57,18 +65,25 @@ document.getElementById('cadastro-form').addEventListener('submit', async functi
   // Envio dos dados para o backend (cadastro)
   // ----------------------------
   try {
-    const resposta = await fetch('http://localhost:5000/api/cadastro', {
+    // ✅ CORREÇÃO FINAL: Usando caminho relativo para o POST
+    const resposta = await fetch('/api/cadastro', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nome, genero, email, senha })
     });
 
-    const resultado = await resposta.json();
+    // MELHORIA: Lemos o JSON somente se a resposta foi bem-sucedida ou se queremos ler o erro JSON
+    const resultado = await resposta.json(); 
 
     if (resposta.ok) {
-      mostrarMensagem(resultado.mensagem, 'success');
-      document.getElementById('cadastro-form').reset(); // Limpa o formulário após sucesso
+      mostrarMensagem(resultado.mensagem || 'Cadastro realizado com sucesso!', 'success');
+
+      // Redireciona o usuário para a página de login após 1.5s
+      setTimeout(() => {
+        window.location.href = '/login';
+      }, 1500);
     } else {
+      // Trata erros retornados pelo Flask (ex: 'E-mail já cadastrado')
       mostrarMensagem(resultado.erro || resultado.mensagem);
     }
   } catch (erro) {
@@ -82,9 +97,14 @@ document.getElementById('cadastro-form').addEventListener('submit', async functi
 // ----------------------------
 function mostrarMensagem(texto, tipo = 'danger') {
   const msg = document.getElementById('mensagem-feedback');
+  // Se o elemento não existir, loga um erro e sai para não travar
+  if (!msg) {
+    console.error("Elemento com id 'mensagem-feedback' não encontrado no HTML.");
+    return;
+  }
   msg.textContent = texto;
-  msg.className = `alert alert-${tipo}`; // Usa classes de alerta (ex: Bootstrap)
-  msg.classList.remove('d-none');
+  msg.className = `alert alert-${tipo}`; // Usa classes do Bootstrap (danger, success, warning)
+  msg.classList.remove('d-none'); // Torna o alerta visível
 }
 
 // ----------------------------

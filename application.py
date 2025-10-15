@@ -12,26 +12,23 @@ from models.usuario import cadastrar_usuario
 from models.disease import Disease
 from db import get_connection
 
-application = Flask(__name__)
-CORS(application)
-
-
-
+application = Flask(__name__) # Nome da aplicação
+CORS(application)             # Uso consistente do nome
 
 # ——————————————————————————————
 # Configurações gerais
 # ——————————————————————————————
-app.secret_key = os.getenv('SECRET_KEY', 'troque_esta_chave_em_producao')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+# CORRIGIDO: Agora usa 'application'
+application.secret_key = os.getenv('SECRET_KEY', 'troque_esta_chave_em_producao')
+application.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # ——————————————————————————————
 # Configuração de uploads
 # ——————————————————————————————
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
 ALLOWED_EXTENSIONS = {'csv'}
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):
     return (
@@ -43,12 +40,12 @@ def allowed_file(filename):
 # ——————————————————————————————
 # Inicialização do ORM
 # ——————————————————————————————
-orm_db = SQLAlchemy(app)
+orm_db = SQLAlchemy(application)
 
 # ——————————————————————————————
 # Rota raiz (landing page)
 # ——————————————————————————————
-@app.route('/', methods=['GET'])
+@application.route('/', methods=['GET'])
 def home():
     if session.get('user_id'):
         return redirect(url_for('resultados'))
@@ -57,7 +54,7 @@ def home():
 # ——————————————————————————————
 # Cadastro de usuário
 # ——————————————————————————————
-@app.route('/cadastro', methods=['GET', 'POST'])
+@application.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
     if request.method == 'GET':
         return render_template('cadastro.html')
@@ -80,7 +77,7 @@ def cadastro():
 # ——————————————————————————————
 # Login / Logout
 # ——————————————————————————————
-@app.route('/login', methods=['GET', 'POST'])
+@application.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
         return render_template('login.html')
@@ -117,7 +114,7 @@ def login():
 
     return render_template('login.html')
 
-@app.route('/logout', methods=['GET'])
+@application.route('/logout', methods=['GET'])
 def logout():
     session.pop('user_id', None)
     # volta à landing page não-logada
@@ -126,13 +123,13 @@ def logout():
 # ——————————————————————————————
 # Upload de dados (CSV)
 # ——————————————————————————————
-@app.route('/carregar_dados', methods=['GET', 'POST'])
+@application.route('/carregar_dados', methods=['GET', 'POST'])
 def carregar_dados():
     if 'user_id' not in session:
         return redirect(url_for('login'))
 
     user_id = session['user_id']
-    save_path = os.path.join(app.config['UPLOAD_FOLDER'], f"{user_id}.csv")
+    save_path = os.path.join(application.config['UPLOAD_FOLDER'], f"{user_id}.csv")
     already = os.path.exists(save_path)
 
     if request.method == 'POST':
@@ -150,7 +147,7 @@ def carregar_dados():
             return redirect(url_for('carregar_dados'))
 
         filename = secure_filename(f"{user_id}.csv")
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
         flash('Upload realizado com sucesso!', 'success')
         return redirect(url_for('carregar_dados'))
 
@@ -159,18 +156,18 @@ def carregar_dados():
 # ——————————————————————————————
 # Páginas estáticas
 # ——————————————————————————————
-@app.route('/sobre', methods=['GET'])
+@application.route('/sobre', methods=['GET'])
 def sobre():
     return render_template('sobre.html')
 
-@app.route('/contato', methods=['GET'])
+@application.route('/contato', methods=['GET'])
 def contato():
     return render_template('contato.html')
 
 # ——————————————————————————————
 # Resultados (rota protegida)
 # ——————————————————————————————
-@app.route('/resultados', methods=['GET'])
+@application.route('/resultados', methods=['GET'])
 def resultados():
     if 'user_id' not in session:
         return redirect(url_for('login'))
@@ -205,7 +202,7 @@ def resultados():
 # ——————————————————————————————
 # APIs de cadastro e verificação de e-mail
 # ——————————————————————————————
-@app.route('/api/cadastro', methods=['POST'])
+@application.route('/api/cadastro', methods=['POST'])
 def cadastro_api():
     data = request.get_json()
     nome = data.get('nome')
@@ -233,7 +230,7 @@ def cadastro_api():
     status = 201 if sucesso else 400
     return jsonify({"mensagem": mensagem}), status
 
-@app.route('/api/verificar-email', methods=['GET'])
+@application.route('/api/verificar-email', methods=['GET'])
 def verificar_email():
     email = request.args.get('email')
     if not email:
@@ -257,4 +254,4 @@ def verificar_email():
 # ——————————————————————————————
 if __name__ == '__main__':
     print("Servidor Flask iniciado em http://localhost:5000")
-    app.run(debug=True, port=5000)
+    application.run(debug=True, port=5000)
