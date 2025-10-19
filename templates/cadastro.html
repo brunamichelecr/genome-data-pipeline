@@ -1,0 +1,132 @@
+<!--
+  Projeto: Genome Data Pipeline
+  Descrição: Frontend para visualização e interação com dados genéticos
+  Autora: Bruna Michele
+  LinkedIn: https://www.linkedin.com/in/brunamcr
+  GitHub do Projeto: https://github.com/brunamichelecr/genome-data-pipeline
+  E-mail: brunamichelecr@gmail.com
+  Local: Osasco, São Paulo, Brasil
+-->
+  {# templates/cadastro.html #}
+{% extends "base.html" %}
+
+{% block title %}Criar Conta — DemoMind{% endblock %}
+{% block body_class %}cadastro-page{% endblock %}
+
+{% block content %}
+<section class="py-5">
+  <div class="container pt-5 mt-5 d-flex justify-content-center align-items-center">
+    <div class="card p-4 shadow-sm" style="max-width: 500px; width: 100%;">
+      <h2 class="text-center mb-4">Criar Conta</h2>
+
+            <div id="mensagem-feedback" class="alert d-none" role="alert"></div>
+            {# Exibe mensagens flash de sucesso/erro (Manter para rotas GET) #}
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, msg in messages %}
+            <div class="alert alert-{{ category }} mb-3">{{ msg }}</div>
+   {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <form action="{{ url_for('cadastro') }}" method="post" novalidate id="cadastro-form">
+        <div class="mb-3">
+          <label for="nome" class="form-label">Nome completo</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nome"
+            name="nome"
+            placeholder="Seu nome"
+            required
+            aria-label="Nome completo">
+        </div>
+
+        <div class="mb-3">
+          <label for="genero" class="form-label">Gênero</label>
+          <select
+            class="form-select"
+            id="genero"
+            name="genero"
+            required
+            aria-label="Selecione seu gênero">
+            <option value="" selected disabled>Selecione seu gênero</option>
+            <option value="F">Feminino</option>
+            <option value="M">Masculino</option>
+            <option value="O">Outro</option>
+            <option value="N">Prefiro não informar</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">E-mail</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="seu@email.com"
+            required>
+        </div>
+
+        <div class="mb-3">
+          <label for="senha" class="form-label">Senha</label>
+          <input
+            type="password"
+            class="form-control"
+            id="senha"
+            name="senha"
+            placeholder="********"
+            required
+            minlength="8">
+        </div>
+
+        <div class="mb-3">
+          <label for="confirmar-senha" class="form-label">Confirmar senha</label>
+          <input
+            type="password"
+            class="form-control"
+            id="confirmar-senha"
+            name="confirmar_senha"
+            placeholder="********"
+            required
+            minlength="8">
+        </div>
+
+        <div class="form-check mb-3">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="termos"
+            name="termos"
+            required>
+          <label class="form-check-label" for="termos">
+            Concordo com os <a href="#">termos de uso</a> e
+            <a href="#">política de privacidade</a>.
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
+
+        <div class="text-center mt-3">
+          <a href="{{ url_for('login') }}">Já tem uma conta? Faça login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+    <div class="cookie-banner">
+        Este site utiliza cookies para melhorar sua experiência. <a href="#">Saiba mais</a>
+        <button class="btn btn-sm btn-primary ms-2">Aceitar</button>
+    </div>
+</section>
+
+{# Script do form e banner de cookies #}
+<script type="module" src="{{ url_for('static', filename='js/cadastro.js') }}"></script>
+<script>
+  document.querySelector('.cookie-banner .btn').addEventListener('click', function () {
+    document.querySelector('.cookie-banner').style.display = 'none';
+  });
+</script>
+{% endblock %}

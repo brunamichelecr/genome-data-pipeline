@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}DemoMind{% endblock %}</title>
+  <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}" type="image/x-icon">
+
+  <!-- CSS do projeto -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+
+  <!-- Fonte Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+    crossorigin="anonymous">
+</head>
+
+<body class="{% block body_class %}{% endblock %} min-vh-100 d-flex flex-column">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+    <div class="container">
+
+      <!-- Logo apenas como imagem -->
+      <div class="navbar-brand">
+        <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="DemoMind" height="40">
+      </div>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+          {% if not session.get('user_id') %}
+            <!-- Não logado -->
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('cadastro') }}">Criar conta</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('sobre') }}">Sobre nós</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('contato') }}">Contato</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-outline-light ms-lg-3" href="{{ url_for('login') }}">Entrar</a>
+            </li>
+
+          {% else %}
+            <!-- Logado -->
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('resultados') }}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('carregar_dados') }}">Carregar dados</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('resultados') }}">Resultados</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('sobre') }}">Sobre nós</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('contato') }}">Contato</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-outline-light ms-lg-3" href="{{ url_for('logout') }}">Sair</a>
+            </li>
+          {% endif %}
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Conteúdo principal -->
+  <main class="flex-grow-1">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+    <footer class="site-footer py-5">
+        <div class="container">
+            <div class="row text-center text-md-start">
+                <!-- Links úteis -->
+                <div class="col-md-4 mb-4">
+                    <h5 class="footer-title">Links úteis</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://github.com/brunamichelecr" target="_blank">GitHub</a></li>
+                        <li><a href="#">Documentação (em breve)</a></li>
+                        <li><a href="mailto:brunamichelecr@gmail.com">Contato</a></li>
+                    </ul>
+                </div>
+
+                <!-- Sobre o projeto -->
+                <div class="col-md-4 mb-4">
+                    <h5 class="footer-title">Sobre o projeto</h5>
+                    <ul class="list-unstyled">
+                        <li>Desenvolvido por Bruna</li>
+                        <li><a href="https://github.com/brunamichelecr/genome-data-pipeline" target="_blank">Este projeto</a></li>
+                        <li><a href="https://www.linkedin.com/in/brunamcr" target="_blank">LinkedIn</a></li>
+                        <li><a href="#">Créditos e tecnologias</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div class="col-md-4 mb-4">
+                    <h5 class="footer-title">Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Aviso de privacidade</a></li>
+                        <li><a href="#">Termos de uso</a></li>
+                        <li><a href="#">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <div class="text-center small text-muted">
+                © 2025 DemoMind. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

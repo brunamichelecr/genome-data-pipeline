@@ -1,0 +1,84 @@
+{# templates/resultados.html #}
+{% extends "base.html" %}
+
+{% block title %}Resultados da Análise Genética — DemoMind{% endblock %}
+{% block body_class %}{{ page_class }}{% endblock %}
+
+{% block content %}
+<main class="container resultados-main mt-5 pt-4">
+  <div class="text-center mb-5">
+    <h1 class="mb-3">Resultados da Análise Genética</h1>
+    <p class="lead">Achados relacionados ao seu perfil genético.</p>
+  </div>
+  <div class="row">
+    {% for d in doencas %}
+      <div class="col-md-6 mb-4">
+        <div class="card-doenca h-100" style="animation-delay: {{ d.delay }}s;">
+          <h4 class="card-title fw-bold">{{ d.name }}</h4>
+          <p class="card-text text-muted">{{ d.brief }}</p>
+
+          <button
+            class="btn-card"
+            data-bs-toggle="modal"
+            data-bs-target="#modal-{{ d.id }}">
+            Leia mais
+          </button>
+
+          <div class="progress mt-3">
+            <div
+              class="progress-bar {{ d.bg_class }}"
+              role="progressbar"
+              style="width: {{ d.percent }}%;"
+              aria-valuenow="{{ d.percent }}"
+              aria-valuemin="0"
+              aria-valuemax="100">
+              {{ d.percent }}%
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {# Modal individual #}
+      <div
+        class="modal fade"
+        id="modal-{{ d.id }}"
+        tabindex="-1"
+        aria-labelledby="modal-{{ d.id }}-label"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5
+                class="modal-title fw-bold"
+                id="modal-{{ d.id }}-label">
+                {{ d.name }}
+              </h5>
+            </div>
+            <div class="modal-body">
+              <p class="text-muted">{{ d.desc }}</p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary btn-sm"
+                data-bs-dismiss="modal">
+                Fechar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</main>
+
+    <div class="cookie-banner">
+        Este site utiliza cookies para melhorar sua experiência. <a href="#">Saiba mais</a>
+        <button class="btn btn-sm btn-primary ms-2">Aceitar</button>
+    </div>
+<script>
+  document.querySelector('.cookie-banner .btn').addEventListener('click', function () {
+    document.querySelector('.cookie-banner').style.display = 'none';
+  });
+</script>
+{% endblock %}

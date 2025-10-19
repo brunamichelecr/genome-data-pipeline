@@ -1,0 +1,72 @@
+<!--
+  Projeto: Genome Data Pipeline
+  Descrição: Frontend para visualização e interação com dados genéticos
+  Autora: Bruna Michele
+  LinkedIn: https://www.linkedin.com/in/brunamcr
+  GitHub do Projeto: https://github.com/brunamichelecr/genome-data-pipeline
+  E-mail: brunamichelecr@gmail.com
+  Local: Osasco, São Paulo, Brasil
+-->
+{# templates/sobre.html #}
+{% extends "base.html" %}
+
+{% block title %}Sobre nós — DemoMind{% endblock %}
+{% block body_class %}sobre-page{% endblock %}
+
+{% block content %}
+<main class="flex-grow-1 container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <h1 class="mb-4 text-center">Quem somos nós</h1>
+      <p class="lead">
+        O <strong>DemoMind</strong> é criado por <strong>Bruna Michele</strong>,
+        engenheira de dados, com foco em saúde personalizada e análise genética.
+      </p>
+      <p class="lead">
+        O projeto transforma arquivos de SNPs em análises claras sobre doenças,
+        genes impactados e riscos genéticos.
+      </p>
+      <p class="lead">
+        Integra fontes confiáveis (NCBI, ClinVar, dbSNP) e tecnologias modernas
+        (Python, Flask, PostgreSQL, Bootstrap). Código aberto no
+        <a href="https://github.com/brunamichelecr/genome-data-pipeline/tree/frontend" target="_blank">GitHub</a>.
+      </p>
+      <p class="lead">
+        Serve como vitrine técnica e convida à reflexão sobre uso ético e seguro
+        de dados genéticos.
+      </p>
+      <h2 class="mt-5">Contato e redes da autora</h2>
+      <ul class="list-unstyled mt-3">
+        <li class="mb-2">
+          <img width="24" height="24" src="https://img.icons8.com/color/48/linkedin.png" alt="LinkedIn" />
+          <a href="https://www.linkedin.com/in/brunamcr" target="_blank">
+            LinkedIn
+          </a>
+        </li>
+        <li class="mb-2">
+          <img width="24" height="24" src="https://img.icons8.com/ios-filled/50/github.png" alt="GitHub" />
+          <a href="https://github.com/brunamichelecr" target="_blank">
+            GitHub
+          </a>
+        </li>
+        <li class="mb-2">
+          <img width="24" height="24" src="https://img.icons8.com/color/48/gmail-new.png" alt="E-mail" />
+          <a href="mailto:brunamichelecr@gmail.com">
+            brunamichelecr@gmail.com
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</main>
+
+<div class="cookie-banner">
+  Este site utiliza cookies para melhorar sua experiência. <a href="#">Saiba mais</a>
+  <button class="btn btn-sm btn-primary ms-2">Aceitar</button>
+</div>
+<script>
+  document.querySelector('.cookie-banner .btn').addEventListener('click', function () {
+    document.querySelector('.cookie-banner').style.display = 'none';
+  });
+</script>
+{% endblock %}

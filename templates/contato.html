@@ -1,0 +1,59 @@
+<!--
+  Projeto: Genome Data Pipeline
+  Descrição: Frontend para visualização e interação com dados genéticos
+  Autora: Bruna Michele
+  LinkedIn: https://www.linkedin.com/in/brunamcr
+  GitHub do Projeto: https://github.com/brunamichelecr/genome-data-pipeline
+  E-mail: brunamichelecr@gmail.com
+  Local: Osasco, São Paulo, Brasil
+-->
+{# templates/contato.html #}
+{% extends "base.html" %}
+
+{% block title %}Contato — DemoMind{% endblock %}
+{% block body_class %}contato-page{% endblock %}
+
+{% block content %}
+<main class="container py-5">
+  <div class="text-center mb-5">
+    <h1 class="mb-3">Entre em contato</h1>
+    <p class="lead">Fique à vontade para me encontrar nas redes ou enviar um e-mail direto:</p>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <span>LinkedIn</span>
+          <a href="https://www.linkedin.com/in/brunamcr" target="_blank" class="btn btn-outline-primary">
+            Visitar
+          </a>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <span>GitHub</span>
+          <a href="https://github.com/brunamichelecr" target="_blank" class="btn btn-outline-primary">
+            Ver projetos
+          </a>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <span>E-mail</span>
+          <a href="mailto:brunamichelecr@gmail.com" class="btn btn-outline-primary">
+            Enviar mensagem
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+    <div class="cookie-banner">
+        Este site utiliza cookies para melhorar sua experiência. <a href="#">Saiba mais</a>
+        <button class="btn btn-sm btn-primary ms-2">Aceitar</button>
+    </div>
+</main>
+
+<script>
+  document.querySelector('.cookie-banner .btn').addEventListener('click', function () {
+    document.querySelector('.cookie-banner').style.display = 'none';
+  });
+</script>
+{% endblock %}

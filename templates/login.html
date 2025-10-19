@@ -1,0 +1,79 @@
+<!--
+  Projeto: Genome Data Pipeline
+  Descrição: Frontend para visualização e interação com dados genéticos
+  Autora: Bruna Michele
+  LinkedIn: https://www.linkedin.com/in/brunamcr
+  GitHub do Projeto: https://github.com/brunamichelecr/genome-data-pipeline
+  E-mail: brunamichelecr@gmail.com
+  Local: Osasco, São Paulo, Brasil
+-->
+{# templates/login.html #}
+{% extends "base.html" %}
+
+{% block title %}Entrar — DemoMind{% endblock %}
+{% block body_class %}login-page{% endblock %}
+
+{% block content %}
+<main class="flex-grow-1 d-flex justify-content-center align-items-start">
+  <div class="card p-4 shadow-sm" style="max-width: 400px; width: 100%;">
+    <h2 class="text-center mb-4">Entrar</h2>
+
+    {# Flash messages #}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="mb-3">
+          {% for category, msg in messages %}
+            <div class="alert alert-{{ category }}">{{ msg }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('login') }}" method="post" novalidate>
+      <div class="mb-3">
+        <label for="email" class="form-label">E-mail</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          class="form-control"
+          placeholder="seu@email.com"
+          required>
+      </div>
+
+      <div class="mb-3">
+        <label for="senha" class="form-label">Senha</label>
+        <input
+          type="password"
+          name="senha"
+          id="senha"
+          class="form-control"
+          placeholder="********"
+          required>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Login</button>
+
+      <div class="text-center mt-3">
+        <a href="#">Esqueceu a senha?</a>
+      </div>
+
+      <div class="text-center mt-2">
+        <a href="{{ url_for('cadastro') }}" class="btn btn-outline-primary w-100">
+          Criar conta
+        </a>
+      </div>
+    </form>
+  </div>
+</main>
+
+    <div class="cookie-banner">
+        Este site utiliza cookies para melhorar sua experiência. <a href="#">Saiba mais</a>
+        <button class="btn btn-sm btn-primary ms-2">Aceitar</button>
+    </div>
+<script>
+  document.querySelector('.cookie-banner .btn').addEventListener('click', function () {
+    document.querySelector('.cookie-banner').style.display = 'none';
+  });
+</script>
+{% endblock %}
