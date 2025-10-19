@@ -181,7 +181,7 @@ erDiagram
 | **Roteamento & Balanceamento** | Distribuição de tráfego, redirecionamento HTTP->HTTPS | AWS Application Load Balancer (ALB) | 
 | **Domínio & DNS** | Gerenciamento de registros e delegação | AWS Route 53 | 
 | **Segurança** | Emissão e gerenciamento de certificado SSL/TLS | AWS Certificate Manager (ACM) |
----
+
 
 1. **Implementação de Conteinerização:** Finalização da imagem Docker e configuração dos serviços para execução no ambiente de produção.
 
@@ -235,3 +235,16 @@ Durante o desenvolvimento do projeto **Genome Data Pipeline**, diversos desafios
 
 - **Documentação e visualização**  
   Traduzir a complexidade técnica do pipeline para uma documentação clara e acessível foi um desafio à parte. O objetivo foi tornar o projeto compreensível tanto para profissionais técnicos quanto para recrutadores e colegas de área.
+
+---
+
+## Sobre Mim
+
+Gestora e bacharel em Tecnologia da Informação, Engenheira de Computação e líder da equipe Skywalkers em batalhas de robôs. Apaixonada por soluções em IoT, automação e robótica.
+
+## Contato
+
+- GitHub: [@brunamichelecr](https://github.com/brunamichelecr)
+- LinkedIn: [brunamcr](https://www.linkedin.com/in/brunamcr)
+
+---
