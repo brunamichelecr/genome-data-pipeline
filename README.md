@@ -159,7 +159,49 @@ erDiagram
    * SNPs de maior risco.
 
 ---
+## Status do Projeto
 
+| Indicador | Status | 
+| :--- | :--- | 
+| **Desenvolvimento** | Funcionalidades principais concluídas | 
+| **Deploy (Infra)** | **CONCLUÍDO** | 
+| **Ambiente** | Produção (AWS) | 
+| **Segurança** | HTTPS (Certificado ACM Válido) | 
+| **Acesso** | `https://dnaengine.com.br` |
+---
+
+## Arquitetura de Produção (AWS)
+
+**Infraestrutura de produção garante alta disponibilidade, escalabilidade e segurança de ponta a ponta.**
+
+| Componente | Função | Tecnologia | 
+| :--- | :--- | :--- | 
+| **Containers** | Serviço de aplicação principal | AWS ECS / Fargate | 
+| **Banco de Dados** | Persistência e gerenciamento de dados | AWS RDS (PostgreSQL) | 
+| **Roteamento & Balanceamento** | Distribuição de tráfego, redirecionamento HTTP->HTTPS | AWS Application Load Balancer (ALB) | 
+| **Domínio & DNS** | Gerenciamento de registros e delegação | AWS Route 53 | 
+| **Segurança** | Emissão e gerenciamento de certificado SSL/TLS | AWS Certificate Manager (ACM) |
+---
+
+1. **Implementação de Conteinerização:** Finalização da imagem Docker e configuração dos serviços para execução no ambiente de produção.
+
+2. **Deploy Contínuo na AWS (Fargate/ECS):** Configuração de um Cluster ECS utilizando **AWS Fargate** (Container as a Service), eliminando a necessidade de gerenciamento de servidores e garantindo escalabilidade automática.
+
+3. **Infraestrutura de Banco de Dados Gerenciada:** Migração e configuração do banco de dados para **Amazon RDS (PostgreSQL)**, garantindo backups automáticos, alta resiliência e menor sobrecarga operacional.
+
+4. **Configuração Final de Roteamento e Segurança (HTTPS):**
+
+   * **Gerenciamento DNS:** Migração da delegação do domínio para o **Amazon Route 53** para integração nativa com serviços AWS.
+
+   * **Certificação SSL/TLS:** Obtenção e validação do certificado SSL/TLS (ACM) no domínio principal.
+
+   * **Publicação Segura:** Configuração do **Application Load Balancer (ALB)** com Listener HTTPS na porta 443, forçando o tráfego seguro e garantindo o sucesso da publicação do domínio com HTTPS.
+
+   * **Resolução de Problemas:** Conclusão do processo de validação, que exigiu a **espera pela propagação global do DNS** após a delegação de servidores.
+
+5. **Gerenciamento de Acesso:** Configuração de Security Groups (SGs) restritivos para comunicação segura entre ALB, Fargate e RDS, incluindo acesso controlado via PgAdmin.
+
+---
 ## Melhorias Futuras (Nível Pleno → Avançado)
 
 * Adicionar **Airflow/Prefect** para orquestração do pipeline.
