@@ -7,21 +7,30 @@ from flask import (
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
+import click # Para comandos CLI
 
+# ATENÇÃO: Removemos 'from Bio import Entrez' e 'import time' deste arquivo, 
+# pois agora eles só são necessários no etl/gene_mapper.py.
+
+# Importações Locais (Modelos e Funções de DB)
 from models.usuario import cadastrar_usuario
 from models.disease import Disease
-from db import get_connection
+from models.gene_models import Gene, GeneDiseaseAssociation # Importação ajustada para o nome correto
+from db import get_connection # Para as funções que ainda usam psycopg2
+
+# NOVO: Importa a lógica de execução da ETL
+from etl.gene_mapper import run_map_medgen_uids, run_map_genes 
 
 application = Flask(__name__) # Nome da aplicação
-CORS(application)             # Uso consistente do nome
+CORS(application)# Uso consistente do nome
 
 # ——————————————————————————————
 # Configurações gerais
 # ——————————————————————————————
-# CORRIGIDO: Agora usa 'application'
 application.secret_key = os.getenv('SECRET_KEY', 'troque_esta_chave_em_producao')
 application.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 # ——————————————————————————————
 # Configuração de uploads
 # ——————————————————————————————
@@ -41,6 +50,15 @@ def allowed_file(filename):
 # Inicialização do ORM
 # ——————————————————————————————
 orm_db = SQLAlchemy(application)
+
+
+# ——————————————————————————————
+# 🧬 Funções de API de Bioinformática (Busca no NCBI) 🧬
+# ——————————————————————————————
+
+# ATENÇÃO: O bloco de funções de API de Bioinformática FOI REMOVIDO DAQUI,
+# pois ele foi movido para etl/gene_mapper.py.
+
 
 # ——————————————————————————————
 # Rota raiz (landing page)
@@ -248,6 +266,28 @@ def verificar_email():
     finally:
         cur.close()
         conn.close()
+
+
+# ——————————————————————————————
+# Comandos CLI (Delegando a execução para o etl/gene_mapper.py)
+# ——————————————————————————————
+
+@application.cli.command("map-medgen-uids")
+@click.option('--disease-id', default=None, type=int, help='ID de uma doença específica para mapear.')
+def map_medgen_uids_cli(disease_id):
+    """Mapeia o nome da doença para o MedGen UID e atualiza a coluna 'medgen_uid'."""
+    with application.app_context():
+        # Delega a lógica para o script ETL
+        run_map_medgen_uids(orm_db, disease_id)
+
+@application.cli.command("map-genes")
+@click.option('--disease-id', default=None, type=int, help='ID de uma doença específica para mapear.')
+def map_genes_cli(disease_id):
+    """Mapeia genes associados no NCBI para doenças no banco de dados, usando MedGen UID."""
+    with application.app_context():
+        # Delega a lógica para o script ETL
+        run_map_genes(orm_db, disease_id)
+
 
 # ——————————————————————————————
 # Inicialização do app
