@@ -10,6 +10,9 @@ function AppNavbar() {
   const { isLoggedIn, user, logout } = useAuth(); // Pega o estado e a função logout
   const navigate = useNavigate();
 
+  // Verifica se o usuário é administrador
+  const isAdmin = user && (user.isAdmin === true || user.role === 'admin');
+
   // Função para lidar com a saída do sistema
   const handleLogout = () => {
     logout(); // Chama a função logout do AuthContext (limpa a sessão)
@@ -36,6 +39,9 @@ function AppNavbar() {
             <Nav.Link as={Link} to="/resultados">Resultados</Nav.Link>
             <Nav.Link as={Link} to="/sobre">Sobre</Nav.Link>
             <Nav.Link as={Link} to="/contato">Contato</Nav.Link>
+            {isAdmin && (
+              <Nav.Link as={Link} to="/cadastro-doenca">Cadastro Doença</Nav.Link>
+            )}
           </Nav>
           
           {/* Links de Autenticação (Direita) */}
@@ -46,6 +52,11 @@ function AppNavbar() {
                 <Navbar.Text className="me-3 fw-bold text-primary">
                   Olá, {user?.nome || 'Usuário'}!
                 </Navbar.Text>
+                {isAdmin && (
+                  <Button as={Link} to="/cadastro-doenca" variant="outline-primary" className="me-2">
+                    Cadastro Doença
+                  </Button>
+                )}
                 <Button className="btn-logout" onClick={handleLogout}>
                   Sair
                 </Button>

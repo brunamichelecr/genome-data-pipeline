@@ -20,6 +20,7 @@ import Home from './pages/Home';
 import Sobre from './pages/Sobre'; 
 import Contato from './pages/Contato'; 
 import CarregarDados from './pages/CarregarDados'; 
+import CadastroDoenca from './pages/CadastroDoenca';
 
 
 function App() {
@@ -46,6 +47,9 @@ function App() {
           {/* Rotas Estáticas */}
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/contato" element={<Contato />} />
+
+          {/* Rota para cadastro de doenças (apenas admins) */}
+          <Route path="/cadastro-doenca" element={<CadastroDoenca />} />
 
           {/* Rota 404/Página não encontrada (Opcional) */}
           {/* <Route path="*" element={<h1>404 - Página Não Encontrada</h1>} /> */}
