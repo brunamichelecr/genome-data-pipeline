@@ -1,18 +1,31 @@
 # models/disease.py
 
-# Evita import direto do app para não gerar dependência circular
-from flask_sqlalchemy import SQLAlchemy
 
-# Cria uma instância local apenas para tipagem — será substituída pelo orm_db no app
-db = SQLAlchemy()
+from db import get_connection
 
 class Disease(db.Model):
+    """
+    Modelo para armazenar informações de doenças, incluindo traduções
+    e UIDs do MedGen/NCBI.
+    """
     __tablename__ = 'diseases'
 
     id_disease = db.Column(db.Integer, primary_key=True)
-    disease_name_pt = db.Column(db.String, nullable=False)
+    disease_name = db.Column(db.String(100), nullable=True)     
+    disease_desc = db.Column(db.Text, nullable=True)             
+    medgen_uid = db.Column(db.String(15), nullable=True)           
+    disease_synonym = db.Column(db.Text, nullable=True)         
+
+    disease_name_pt = db.Column(db.String(100), nullable=False)
     disease_desc_pt = db.Column(db.Text, nullable=True)
     breve_desc = db.Column(db.Text, nullable=True)
+    
+    # Relação Muitos-para-Muitos (M:M) com Genes, usando a instância db
+    gene_associations = db.relationship(
+        "GeneDiseaseAssociation", 
+        back_populates="disease",
+        cascade="all, delete-orphan" # Regra para exclusão
+    )
 
     def __repr__(self):
         return f"<Disease {self.disease_name_pt}>"
