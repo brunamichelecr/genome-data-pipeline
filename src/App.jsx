@@ -16,6 +16,8 @@ import Footer from './components/Footer';
 import Cadastro from './pages/Cadastro'; 
 import Login from './pages/Login';
 import Resultados from './pages/Resultados';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import Home from './pages/Home'; 
 import Sobre from './pages/Sobre'; 
 import Contato from './pages/Contato'; 
@@ -39,6 +41,8 @@ function App() {
           {/* Rotas de Autenticação */}
           <Route path="/cadastro" element={<Cadastro />} /> 
           <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           
           {/* Rota de Funcionalidade */}
           <Route path="/carregar-dados" element={<CarregarDados />} />

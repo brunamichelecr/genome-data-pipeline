@@ -7,7 +7,7 @@ import CookieBanner from '../components/CookieBanner';
 
 function CadastroDoenca() {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, token } = useAuth();
 
   const [formData, setFormData] = useState({
     disease_name: '',
@@ -40,11 +40,21 @@ function CadastroDoenca() {
     setIsSubmitting(true);
 
     try {
-      // Simulação de chamada à API: aguarda 1s e retorna sucesso
-      await new Promise(res => setTimeout(res, 1000));
-      setFeedback({ message: 'Doença cadastrada com sucesso.', type: 'success' });
-      // Após cadastro, opcionalmente limpar ou redirecionar
-      setFormData({ disease_name: '', disease_name_pt: '', medgen_uid: '', disease_desc_pt: '', breve_desc: '' });
+      const resp = await fetch('http://127.0.0.1:8000/api/doencas', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token ? { Authorization: `Bearer ${token}` } : {})
+        },
+        body: JSON.stringify(formData)
+      });
+      const data = await resp.json();
+      if (!resp.ok) {
+        setFeedback({ message: data.detail || 'Erro ao cadastrar. Tente novamente.', type: 'danger' });
+      } else {
+        setFeedback({ message: 'Doença cadastrada com sucesso.', type: 'success' });
+        setFormData({ disease_name: '', disease_name_pt: '', medgen_uid: '', disease_desc_pt: '', breve_desc: '' });
+      }
       // navigate('/resultados'); // se desejar redirecionar
     } catch (err) {
       console.error(err);
@@ -55,7 +65,7 @@ function CadastroDoenca() {
   };
 
   // Verificação simples de admin: espera-se que `user` tenha `isAdmin` ou `role === 'admin'`
-  const isAdmin = user && (user.isAdmin === true || user.role === 'admin');
+  const isAdmin = user && (user.is_admin === true || user.isAdmin === true || user.role === 'admin');
 
   if (!isAdmin) {
     return (

@@ -1,3 +1,56 @@
+# Python
+backend/.venv/
+venv/
+.env
+.env.*
+__pycache__/
+*.py[cod]
+*.egg-info/
+pip-wheel-metadata/
+*.sqlite3
+
+# Byte-compiled / caches
+*.pyc
+*.pyo
+*.pyd
+
+# Node / frontend
+node_modules/
+dist/
+build/
+npm-debug.log
+yarn-error.log
+
+# Editor / IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage / test
+htmlcov/
+.coverage
+.coverage.*
+
+# Logs
+*.log
+
+# Archives / backups created by the agent
+backend/archived_by_agent*/
+backend/archived_by_agent_*.zip
+backend/scripts_backup_*.zip
+backend/archive_debug/
+
+# Misc
+*.bak
+*.tmp
+*.swp
 node_modules/
 .env
 .DS_Store
@@ -6,3 +59,6 @@ build/
 .cache/
 coverage/
 *.log
+
+# ignore backend env
+backend/.env

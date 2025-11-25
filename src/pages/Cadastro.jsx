@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 // Importamos o React-Bootstrap para usar os componentes visuais
 import { Form, Button, Card, Container, Alert } from 'react-bootstrap';
 // Importamos o Link para navegação e o useAuth para o estado global
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext'; 
 import CookieBanner from '../components/CookieBanner'; 
 
@@ -26,6 +26,7 @@ function Cadastro() {
 
   // 💡 Hook de Contexto Global: Pega a função 'login' do AuthProvider
   const { login } = useAuth(); 
+  const navigate = useNavigate();
 
   // Manipulador de Mudança Genérico
   const handleChange = (e) => {
@@ -77,17 +78,20 @@ function Cadastro() {
     setIsSubmitting(true); 
 
     try {
-      // --- SIMULAÇÃO DA CHAMADA À API ---
-      if (formData.email === 'simular@erro.com') {
-        setFeedback({ message: 'E-mail já cadastrado. Tente outro.', type: 'danger' });
-      } 
-      else {
-        await new Promise(resolve => setTimeout(resolve, 1500)); 
-        
+      const resp = await fetch('http://127.0.0.1:8000/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome: formData.nome, genero: formData.genero, email: formData.email, senha: formData.senha })
+      });
+      const data = await resp.json();
+      if (!resp.ok) {
+        setFeedback({ message: data.detail || 'E-mail já cadastrado. Tente outro.', type: 'danger' });
+      } else {
         setFeedback({ message: 'Cadastro realizado com sucesso! Redirecionando...', type: 'success' });
-        
-        // Chama a função de login do Contexto para atualizar o estado global
-        login({ email: formData.email, nome: formData.nome }); 
+        // grava user + token
+        login(data.user, data.access_token);
+        // redirecionamento após login (curto delay para mostrar mensagem)
+        setTimeout(() => navigate('/resultados'), 900);
       }
 
     } catch (error) {
@@ -157,7 +161,7 @@ function Cadastro() {
                 name="senha"
                 placeholder="********"
                 required
-                minlength="8"
+                minLength="8"
                 value={formData.senha}
                 onChange={handleChange}
               />
@@ -171,7 +175,7 @@ function Cadastro() {
                 name="confirmar"
                 placeholder="********"
                 required
-                minlength="8"
+                minLength="8"
                 value={formData.confirmar}
                 onChange={handleChange}
               />

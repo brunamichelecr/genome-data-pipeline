@@ -41,19 +41,19 @@ function Login() {
     setIsSubmitting(true);
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000)); 
-      
-      // Validação simulada para teste:
-      if (formData.email === 'test@demomind.com' && formData.senha === 'senha123') {
-        setFeedback({ message: 'Login realizado com sucesso!', type: 'success' });
-        
-        login({ email: formData.email, nome: 'Usuário de Teste' }); 
-        
-        // Redireciona para onde o usuário logado deve ir (ex: página de resultados)
-        navigate('/resultados'); 
-        
+      const resp = await fetch('http://127.0.0.1:8000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: formData.email, senha: formData.senha })
+      });
+      const data = await resp.json();
+      if (!resp.ok) {
+        setFeedback({ message: data.detail || data.message || 'E-mail ou senha inválidos.', type: 'danger' });
       } else {
-        setFeedback({ message: 'E-mail ou senha inválidos.', type: 'danger' });
+        setFeedback({ message: 'Login realizado com sucesso!', type: 'success' });
+        // grava token + user via AuthContext
+        login(data.user, data.access_token);
+        navigate('/resultados');
       }
 
     } catch (error) {
@@ -106,7 +106,7 @@ function Login() {
           </Button>
 
           <div className="text-center mt-3">
-            <a href="#">Esqueceu a senha? (Simulação)</a>
+            <Link to="/forgot-password">Esqueceu a senha?</Link>
           </div>
 
           <div className="text-center mt-2">
